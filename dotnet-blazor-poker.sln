@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-blazor-poker", "dotnet-blazor-poker\dotnet-blazor-poker.csproj", "{4FB487A4-AD91-424E-91DB-906B2BE4D221}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED4B2132-B70C-4B8F-AB19-F62C42CCAE71}
+	EndGlobalSection
+EndGlobal
