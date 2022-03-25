@@ -1,5 +1,5 @@
 {
-  "name": "dotnet-blazor-poker",
+  "name": "DotnetBlazorPoker.App",
   "short_name": "dotnet-blazor-poker",
   "start_url": "./",
   "display": "standalone",

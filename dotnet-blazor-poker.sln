@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-blazor-poker", "dotnet-blazor-poker\dotnet-blazor-poker.csproj", "{4FB487A4-AD91-424E-91DB-906B2BE4D221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetBlazorPoker.App", "DotnetBlazorPoker.App\DotnetBlazorPoker.App.csproj", "{6EB07EFE-A2E0-4494-8F34-D789C2DAE552}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetBlazorPoker.Models", "DotnetBlazorPoker.Models\DotnetBlazorPoker.Models.csproj", "{ADF1F029-2893-455A-B681-CFCAB7F82903}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FB487A4-AD91-424E-91DB-906B2BE4D221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB07EFE-A2E0-4494-8F34-D789C2DAE552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB07EFE-A2E0-4494-8F34-D789C2DAE552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB07EFE-A2E0-4494-8F34-D789C2DAE552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB07EFE-A2E0-4494-8F34-D789C2DAE552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF1F029-2893-455A-B681-CFCAB7F82903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF1F029-2893-455A-B681-CFCAB7F82903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF1F029-2893-455A-B681-CFCAB7F82903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF1F029-2893-455A-B681-CFCAB7F82903}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

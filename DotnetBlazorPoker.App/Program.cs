@@ -1,4 +1,4 @@
-using dotnet_blazor_poker;
+using DotnetBlazorPoker.App;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "dotnet-blazor-poker": {
+    "DotnetBlazorPoker.App": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

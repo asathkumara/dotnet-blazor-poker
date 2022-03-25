@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Components\Pages\" />
     <Folder Include="Components\Utils\" />
+    <Folder Include="wwwroot\resources\images\cards\" />
   </ItemGroup>
 
 </Project>
