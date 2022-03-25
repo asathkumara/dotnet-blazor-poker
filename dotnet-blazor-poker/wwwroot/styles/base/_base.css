@@ -2,6 +2,14 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body
+{
+    background-image: url("../../resources/images/poker-table-1920x1080.webp");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
 h1:focus {
     outline: none;
 }

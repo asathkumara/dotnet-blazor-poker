@@ -1,0 +1,24 @@
+﻿@{
+    string logo132 = "resources/images/poker-logo-132x94.webp";
+    string logo238 = "resources/images/poker-logo-238x170.webp";
+    string logo349 = "resources/images/poker-logo-349x250.webp";
+    string logo395 = "resources/images/poker-logo-395x283.webp";
+    string logo577 = "resources/images/poker-logo-577x413.webp";
+}
+
+<picture>
+    <source
+        type="image/webp"
+        media="(orientation: portrait)"
+        srcset=@($"{logo132} 132w, {logo238} 238w,{logo395} 395w")
+        sizes="(max-width: 600px) 395px"
+    />
+
+    <img class=@ClassName src=@logo349 alt="The logo for the web app" />
+</picture>
+
+@code 
+{
+    [Parameter]
+    public string ClassName { get; set; } = "app-logo";
+}

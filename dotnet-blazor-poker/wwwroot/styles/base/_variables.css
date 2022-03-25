@@ -1,12 +1,11 @@
-﻿:root 
-{
-    --background-color: white;
-    --background-color2: black;
-
-    --text-color: white;
-    --text-color2: black;
-
-    --font-small: .75rem;
-    --font-medium: .9375rem;
-    --font-large: 1.25rem;
+﻿:root {
+    --background-color: var(--color-white);
+    --background-color2: var(--color-black);
+    --color-white: white;
+    --color-black: black;
+    --font-small: 1.25rem;
+    --font-medium: 1.5625rem;
+    --font-large: 1.875rem;
+    --font-family: 'Press Start 2P', sans-serif;
+    --font-family2: 'Roboto Condensed', sans-serif;
 }

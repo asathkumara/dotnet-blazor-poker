@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Base\" />
+    <Folder Include="Components\Pages\" />
     <Folder Include="Components\Utils\" />
-    <Folder Include="wwwroot\resources\images\" />
   </ItemGroup>
 
 </Project>

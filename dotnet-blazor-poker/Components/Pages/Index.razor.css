@@ -1,0 +1,67 @@
+﻿.content
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.menu
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-option
+{
+    background-color: transparent;
+
+    text-transform: uppercase;
+    font-family: var(--font-family);
+    font-size: var(--font-medium);
+    color: var(--color-white);
+
+    border: 2px solid var(--color-white);
+    width: 280px;
+    height: 100px;
+
+    margin-bottom: 30px;
+
+    user-select: none;
+}
+
+    .menu-option:hover 
+    {
+        cursor: pointer;
+        border: 2px solid var(--color-black);
+        background-color: var(--color-white);
+        color: var(--color-black);
+
+        transition: background-color 500ms linear;
+    }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .app-logo 
+    {
+        width: 395px;
+        height: 283px;
+    }
+
+    .menu-option 
+    {
+        font-size: var(--font-large);
+
+        width: 244px;
+        height: 103px;
+        margin-bottom: 38px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .app-logo 
+    {
+        width: 577px;
+        height: 413px;
+    }
+}

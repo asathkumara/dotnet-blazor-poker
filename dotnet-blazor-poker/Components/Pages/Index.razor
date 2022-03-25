@@ -1,0 +1,23 @@
+﻿@page "/"
+@inject NavigationManager Navigator
+
+<PageTitle>Index</PageTitle>
+
+<main class="content">
+    <Logo/>
+
+    <section class="menu">
+        <button class="menu-option" @onclick=@(() => navigateTo("/start"))>Start</button>
+        <button class="menu-option" @onclick=@(() => navigateTo("/help"))>Help</button>
+        <button class="menu-option" @onclick=@(() => navigateTo("/options"))>Options</button>
+    </section>
+    
+</main>
+
+@code
+{
+    private void navigateTo(string uri)
+    {
+        Navigator.NavigateTo(uri);
+    }
+}
