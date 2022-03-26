@@ -1,11 +1,31 @@
 ﻿<img 
     class="card" 
-    src=@($"resources/images/cards/{Card}.webp") 
-    alt=@($"The {Card.Rank} of {Card.Suit} card") 
+    src=@(GetSource()) 
+    alt=@(GetAltText()) 
 />
 
 @code 
 {
     [Parameter]
     public Card? Card { get; set; }
+
+    private string GetSource()
+    {
+        if (Card is not null)
+        {
+            return $"resources/images/cards/{Card}.webp";
+        }
+
+        return "resources/images/cards/cover.webp";
+    }
+
+    private string GetAltText()
+    {
+        if (Card is not null)
+        {
+            return $"The {Card.Rank} of {Card.Suit} card";
+        }
+        
+        return "The card back";
+    }
 }

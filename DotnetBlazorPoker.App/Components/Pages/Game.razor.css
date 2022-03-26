@@ -2,10 +2,25 @@
 {
     display: grid;
     grid-template:
-        [header-left] "logo . exit" [header-right]
+        [header-left] "logo dialogue exit" [header-right]
         [content-left] "left topMiddle right" [content-right]
         [content-left] "left middle right" [content-right]
         [content-left] "left bottomMiddle right" [content-right];
+
+}
+
+.exit-game
+{
+    grid-area: exit;
+    justify-self: center;
+    border: none;
+    width: 50px;
+    height: 30px;
+}
+
+.exit-game:hover
+{
+    background-color: transparent;
 
 }
 
@@ -43,12 +58,12 @@
 .poker-hand-info > h2
 {
     border-bottom: 1px solid var(--color-white);
+    padding: .9375rem;
 }
 
-.poker-hand-info > h2,
 .poker-hand-info > p
 {
-    padding: .3125rem;
+    padding: .625rem;
 }
 
 .user-balance 

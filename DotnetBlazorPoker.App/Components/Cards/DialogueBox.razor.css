@@ -1,0 +1,25 @@
+﻿.dialogue-box
+{
+    grid-area: dialogue;
+    justify-self: center;
+    display: flex;
+    
+
+    background-color: rgba(10, 9, 9, 0.3);
+    border-radius: 25px;
+
+    margin: 10px;
+    padding: 10px;
+    width: 493px;
+    height: 108px;
+
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.dialogue-avatar,
+.dialogue,
+.dialogue-text
+{
+    margin: 10px;
+}

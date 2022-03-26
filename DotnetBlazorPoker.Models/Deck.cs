@@ -5,16 +5,19 @@ namespace DotnetBlazorPoker.Models
     public class Deck : IEnumerable<Card>
     {
         private List<Card> _cards;
+        private List<Card> _cachedCards;
 
         public Deck()
         {
             _cards = new List<Card>();
+            _cachedCards = new List<Card>();
 
             foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
                 foreach (Rank rank in Enum.GetValues(typeof(Rank)))
                 {
                     _cards.Add(new Card(suit, rank));
+                    _cachedCards.Add(new Card(suit, rank));
                 }
             }
         }
@@ -25,6 +28,23 @@ namespace DotnetBlazorPoker.Models
             {
                 return _cards[index];
             }
+            set
+            {
+                _cards[index] = value;
+            }
+        }
+
+        public Card Pop()
+        {
+            Card topCard = _cards[0];
+            _cards.RemoveAt(0);
+            return topCard;
+        }
+
+        public void Reset()
+        {
+            _cards.Clear();
+            _cards.AddRange(_cachedCards);
         }
 
         public IEnumerator<Card> GetEnumerator()

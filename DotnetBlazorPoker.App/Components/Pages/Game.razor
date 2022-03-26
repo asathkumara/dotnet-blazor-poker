@@ -1,8 +1,10 @@
 ﻿@page "/start"
+@inject NavigationManager Navigator
 
 <main class="content">
     <Logo />
-    <Hand Cards=@GetCards() />
+    <DialogueBox />
+    <PlayerHand Cards=@Hand />
 
     <section class="user-balance">
         <h1>Balance</h1>
@@ -11,7 +13,7 @@
 
     <section class="user-actions">
         <button class="user-action">Bet</button>
-        <button class="user-action">Hold</button>
+        <button class="user-action" @onclick=@(() => Hand = GetCards())>Hold</button>
     </section>
 
     <aside class="left-info">
@@ -57,21 +59,25 @@
             <p>0.9</p>
         </article>
     </aside>
+
+    <button class="exit-game" @onclick=@(() => navigateTo("/"))>X</button>
 </main>
 
 @code 
 {
     public int Balance { get; set; } = 3000;
 
+    public Dealer Dealer { get; set; } = new Dealer();
+
+    public List<Card> Hand { get; set; }
+
+    private void navigateTo(string uri)
+    {
+        Navigator.NavigateTo(uri);
+    }
+
     private List<Card> GetCards()
     {
-        return new List<Card>()
-        {
-            new Card(Suit.Clubs, Rank.Ace),
-            new Card(Suit.Clubs, Rank.Ace),
-            new Card(Suit.Clubs, Rank.Ace),
-            new Card(Suit.Clubs, Rank.Ace),
-            new Card(Suit.Clubs, Rank.Ace)
-        };
+        return Dealer.DealCards(5);
     }
 }

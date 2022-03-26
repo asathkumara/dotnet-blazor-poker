@@ -1,7 +1,11 @@
-﻿public enum Suit
+﻿namespace DotnetBlazorPoker.Models
 {
-    Hearts,
-    Clubs,
-    Diamonds,
-    Spade
+    public enum Suit
+    {
+        Hearts,
+        Clubs,
+        Diamonds,
+        Spades
+    }
+
 }

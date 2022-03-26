@@ -1,0 +1,19 @@
+﻿<div class="dialogue-box">
+    <img class="dialogue-avatar" src=@AvatarSrc alt="A picture of the speaker" />
+    <div class="dialogue">
+        <h2 class="speaker">@Speaker</h2>
+        <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
+    </div>
+</div>
+
+@code 
+{
+    [Parameter]
+    public string AvatarSrc { get; set; } = "resources/images/jack-avatar.webp";
+
+    [Parameter]
+    public string Speaker { get; set; } = "Dealer:";
+
+    [Parameter]
+    public string DialogueText { get; set; } = "Hello World";
+}

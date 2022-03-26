@@ -1,11 +1,15 @@
-﻿public enum PokerHand
+﻿namespace DotnetBlazorPoker.Models
 {
-    TwoPair = 0,
-    ThreeOfAKind,
-    Straight,
-    Flush,
-    FullHouse,
-    FourOfAKind,
-    StraightFlush,
-    RoyalFlush
+    public enum PokerHand
+    {
+        TwoPair = 0,
+        ThreeOfAKind,
+        Straight,
+        Flush,
+        FullHouse,
+        FourOfAKind,
+        StraightFlush,
+        RoyalFlush
+    }
+
 }
