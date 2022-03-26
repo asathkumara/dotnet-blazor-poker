@@ -1,0 +1,11 @@
+﻿<img 
+    class="card" 
+    src=@($"resources/images/cards/{Card}.webp") 
+    alt=@($"The {Card.Rank} of {Card.Suit} card") 
+/>
+
+@code 
+{
+    [Parameter]
+    public Card? Card { get; set; }
+}

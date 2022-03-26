@@ -1,0 +1,12 @@
+﻿<section class="player-hand">
+    @foreach(Card card in Cards)
+    {
+        <CardItem Card=card/>
+    }
+</section>
+
+@code 
+{
+    [Parameter]
+    public List<Card> Cards { get; set; }
+}

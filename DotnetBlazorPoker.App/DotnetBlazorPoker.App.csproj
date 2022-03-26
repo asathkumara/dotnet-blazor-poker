@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,9 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Pages\" />
     <Folder Include="Components\Utils\" />
     <Folder Include="wwwroot\resources\images\cards\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotnetBlazorPoker.Models\DotnetBlazorPoker.Models.csproj" />
   </ItemGroup>
 
 </Project>

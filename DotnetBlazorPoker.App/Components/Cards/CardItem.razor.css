@@ -1,0 +1,32 @@
+﻿.card
+{
+    width: 143px;
+    height: 201px;
+    padding: 20px;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .card
+    {
+        width: 78px;
+        height: 110px;
+    }
+
+    .card:nth-child(4) 
+    {
+        margin-left: 60px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) 
+{
+    .card 
+    {
+        width: 143px;
+        height: 201px;
+    }   
+
+
+}

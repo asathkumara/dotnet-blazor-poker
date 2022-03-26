@@ -1,0 +1,77 @@
+﻿@page "/start"
+
+<main class="content">
+    <Logo />
+    <Hand Cards=@GetCards() />
+
+    <section class="user-balance">
+        <h1>Balance</h1>
+        <p>@Balance</p>
+    </section>
+
+    <section class="user-actions">
+        <button class="user-action">Bet</button>
+        <button class="user-action">Hold</button>
+    </section>
+
+    <aside class="left-info">
+        <article class="poker-hand-info">
+            <h2>Royal Flush</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>Straight Flush</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>4 of a kind</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>Full House</h2>
+            <p>0.9</p>
+        </article>
+    </aside>
+    
+    <aside class="right-info">
+        <article class="poker-hand-info">
+            <h2>Straight</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>3 of a kind</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>2 of a kind</h2>
+            <p>0.9</p>
+        </article>
+
+        <article class="poker-hand-info">
+            <h2>Two Pair</h2>
+            <p>0.9</p>
+        </article>
+    </aside>
+</main>
+
+@code 
+{
+    public int Balance { get; set; } = 3000;
+
+    private List<Card> GetCards()
+    {
+        return new List<Card>()
+        {
+            new Card(Suit.Clubs, Rank.Ace),
+            new Card(Suit.Clubs, Rank.Ace),
+            new Card(Suit.Clubs, Rank.Ace),
+            new Card(Suit.Clubs, Rank.Ace),
+            new Card(Suit.Clubs, Rank.Ace)
+        };
+    }
+}

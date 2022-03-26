@@ -1,43 +1,24 @@
-﻿.content
+﻿.content 
 {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template:
+        [header-left] "logo" [header-right]
+        [content-left] "content" [content-right];
+}
+
+::deep picture 
+{
+    grid-area: logo;
 }
 
 .menu
 {
+    grid-area: content;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-.menu-option
-{
-    background-color: transparent;
-
-    text-transform: uppercase;
-    font-family: var(--font-family);
-    font-size: var(--font-medium);
-    color: var(--color-white);
-
-    border: 2px solid var(--color-white);
-    width: 280px;
-    height: 100px;
-
-    margin-bottom: 30px;
-
-    user-select: none;
-}
-
-    .menu-option:hover 
-    {
-        cursor: pointer;
-        border: 2px solid var(--color-black);
-        background-color: var(--color-white);
-        color: var(--color-black);
-
-        transition: background-color 500ms linear;
-    }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {

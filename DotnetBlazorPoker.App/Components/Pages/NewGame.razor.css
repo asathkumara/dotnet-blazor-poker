@@ -1,0 +1,116 @@
+﻿.content 
+{
+    display: grid;
+    grid-template:
+        [header-left] "logo . exit" [header-right]
+        [content-left] "left topMiddle right" [content-right]
+        [content-left] "left middle right" [content-right]
+        [content-left] "left bottomMiddle right" [content-right];
+
+}
+
+.left-info
+{
+    grid-area: left;
+}
+
+.right-info
+{
+    grid-area: right;
+}
+
+.left-info,
+.right-info 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.poker-hand-info
+{
+    border: 1px solid var(--color-white);
+
+    color: var(--color-white);
+    text-align: center;
+    text-transform: uppercase;
+
+    width: 150px;
+    min-height: 80px;
+    margin-bottom: .9375rem;
+}
+
+.poker-hand-info > h2
+{
+    border-bottom: 1px solid var(--color-white);
+}
+
+.poker-hand-info > h2,
+.poker-hand-info > p
+{
+    padding: .3125rem;
+}
+
+.user-balance 
+{
+    grid-area: topMiddle;
+    margin-left: 1.25rem;
+
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-size: var(--font-small);
+}
+
+.user-actions 
+{
+    grid-area: bottomMiddle;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.user-action
+{
+    margin-right: 20px;
+    max-width: 150px;
+   /* min-height: 135px;*/
+}
+
+::deep .app-logo 
+{
+    width: 150px;
+    height: 120px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) 
+{
+    .content 
+    {
+        grid-template:
+            [header-left] "logo . exit" [header-right]
+            [content-left] "topMiddle topMiddle topMiddle" [content-right]
+            [content-left] "middle middle middle" [content-right]
+            [content-left] "bottomMiddle bottomMiddle bottomMiddle" [content-right];
+    }
+
+    .left-info,
+    .right-info
+    {
+        display: none;
+    }
+
+    .user-balance
+    {
+        margin: 0 auto;
+        font-size: var(--font-medium);
+    }
+
+    .user-actions 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
