@@ -3,6 +3,8 @@
     width: 143px;
     height: 201px;
     padding: 20px;
+
+    user-select: none;
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

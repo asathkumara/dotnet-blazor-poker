@@ -1,11 +1,20 @@
-﻿<img 
+﻿@inject IJSRuntime JS;
+
+<img 
+    @ref="cardReference"
     class="card" 
     src=@(GetSource()) 
     alt=@(GetAltText()) 
+    data-tilt
+    data-tilt-scale="1.2"
+    draggable="false"
 />
 
 @code 
 {
+    private IJSObjectReference _vanillaTilt;
+    private ElementReference cardReference;
+
     [Parameter]
     public Card? Card { get; set; }
 
@@ -25,7 +34,16 @@
         {
             return $"The {Card.Rank} of {Card.Suit} card";
         }
-        
+
         return "The card back";
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", cardReference);
+        }
     }
 }

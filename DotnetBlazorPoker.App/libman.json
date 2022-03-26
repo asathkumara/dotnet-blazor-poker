@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "vanilla-tilt@1.7.2",
+      "destination": "wwwroot/lib/vanilla-tilt/",
+      "files": [
+        "vanilla-tilt.min.js"
+      ]
+    }
+  ]
+}

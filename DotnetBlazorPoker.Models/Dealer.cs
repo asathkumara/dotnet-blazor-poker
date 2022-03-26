@@ -16,6 +16,7 @@ namespace DotnetBlazorPoker.Models
         {
             _deck = new Deck();
             _random = new Random();
+            ShuffleDeck();
         }
 
         private void ShuffleDeck()
