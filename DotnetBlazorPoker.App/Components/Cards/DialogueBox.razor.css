@@ -11,10 +11,16 @@
     margin: 10px;
     padding: 10px;
     width: 493px;
-    height: 108px;
+    height: 125px;
 
     text-transform: uppercase;
     color: var(--color-white);
+}
+
+.dialogue
+{
+    display: flex;
+    flex-direction: column;
 }
 
 .dialogue-avatar,
@@ -22,4 +28,34 @@
 .dialogue-text
 {
     margin: 10px;
+}
+
+.dialogue-button
+{
+    width: 100px;
+    min-height: 40px;
+    font-size: 15px;
+    margin: 10px;
+    align-self: center;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) 
+{
+    .dialogue-box
+    {
+        grid-area: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(1, 1, 1, 0.6);
+
+        width: 100vw;
+        min-height: 100vh;
+        margin: 0 auto;
+
+        position: fixed;
+        z-index: 1;
+    }
 }
