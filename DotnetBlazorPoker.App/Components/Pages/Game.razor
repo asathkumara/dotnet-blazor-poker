@@ -3,7 +3,7 @@
 
 <main class="content">
     <Logo />
-    <DialogueBox />
+    <DialogueBox DialogueText=@CurrentDialogue/>
     <PlayerHand Cards=@Hand />
 
     <section class="user-balance">
@@ -71,6 +71,18 @@
 
     public List<Card> Hand { get; set; }
 
+    public GameState CurrentState { get; set; } = GameState.Deal;
+
+    public String CurrentDialogue { get; set; } = "Dealing...";
+
+    public Dictionary<GameState, String> DealerDialogue => new Dictionary<GameState, String>()
+    {
+        {GameState.Deal, "Dealing..."},
+        {GameState.Bet, "Place your bets."},
+        {GameState.Draw, "Select up to 3 cards to replace."},
+        {GameState.Showdown, "You found a Royal Flush! You are awarded 50 credits."}
+    };
+
     private void navigateTo(string uri)
     {
         Navigator.NavigateTo(uri);
@@ -78,6 +90,16 @@
 
     private List<Card> GetCards()
     {
+        AdvanceGameState();
+
         return Dealer.DealCards(5);
+    }
+
+    private void AdvanceGameState()
+    {
+        GameState[] gameStates =  Enum.GetValues<GameState>();
+        CurrentState = gameStates[((int)CurrentState + 1) % gameStates.Length];
+        DealerDialogue.TryGetValue(CurrentState, out String newDialogue);
+        CurrentDialogue = newDialogue;
     }
 }

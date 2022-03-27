@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Components\Utils\" />
+    <Folder Include="wwwroot\lib\components\" />
     <Folder Include="wwwroot\resources\images\cards\" />
   </ItemGroup>
 

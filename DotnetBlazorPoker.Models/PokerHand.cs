@@ -9,7 +9,8 @@
         FullHouse,
         FourOfAKind,
         StraightFlush,
-        RoyalFlush
+        RoyalFlush,
+        None
     }
 
 }
