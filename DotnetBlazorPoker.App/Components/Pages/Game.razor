@@ -1,19 +1,40 @@
 ﻿@page "/start"
+@inject GameStateManager GameStateManager
 @inject NavigationManager Navigator
 
 <main class="content">
     <Logo />
-    <DialogueBox DialogueText=@CurrentDialogue/>
-    <PlayerHand Cards=@Hand />
+    <DialogueBox DialogueText=@GameStateManager.CurrentDialogue/>
+
+    @if (GameStateManager.CurrentState == GameState.Deal)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=false />
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Bet)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Draw)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true IsSelectable=true/>
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Showdown)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
+    }
 
     <section class="user-balance">
         <h1>Balance</h1>
-        <p>@Balance</p>
+        <p>@GameStateManager.Player.Balance</p>
     </section>
+
 
     <section class="user-actions">
         <button class="user-action">Bet</button>
-        <button class="user-action" @onclick=@(() => Hand = GetCards())>Hold</button>
+        <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Hold</button>
     </section>
 
     <aside class="left-info">
@@ -24,82 +45,71 @@
 
         <article class="poker-hand-info">
             <h2>Straight Flush</h2>
-            <p>0.9</p>
+            <p>0.8</p>
         </article>
 
         <article class="poker-hand-info">
             <h2>4 of a kind</h2>
-            <p>0.9</p>
+            <p>0.7</p>
         </article>
 
         <article class="poker-hand-info">
             <h2>Full House</h2>
-            <p>0.9</p>
+            <p>0.6</p>
         </article>
     </aside>
     
     <aside class="right-info">
         <article class="poker-hand-info">
             <h2>Straight</h2>
-            <p>0.9</p>
+            <p>0.5</p>
         </article>
 
         <article class="poker-hand-info">
             <h2>3 of a kind</h2>
-            <p>0.9</p>
+            <p>0.4</p>
         </article>
 
         <article class="poker-hand-info">
             <h2>2 of a kind</h2>
-            <p>0.9</p>
+            <p>0.3</p>
         </article>
 
         <article class="poker-hand-info">
             <h2>Two Pair</h2>
-            <p>0.9</p>
+            <p>0.2</p>
         </article>
     </aside>
 
-    <button class="exit-game" @onclick=@(() => navigateTo("/"))>X</button>
+    <button class="exit-game" @onclick=@(() => NavigateTo("/"))>X</button>
 </main>
 
 @code 
 {
-    public int Balance { get; set; } = 3000;
-
-    public Dealer Dealer { get; set; } = new Dealer();
-
-    public List<Card> Hand { get; set; }
-
-    public GameState CurrentState { get; set; } = GameState.Deal;
-
-    public String CurrentDialogue { get; set; } = "Dealing...";
-
-    public Dictionary<GameState, String> DealerDialogue => new Dictionary<GameState, String>()
+    protected override void OnInitialized()
     {
-        {GameState.Deal, "Dealing..."},
-        {GameState.Bet, "Place your bets."},
-        {GameState.Draw, "Select up to 3 cards to replace."},
-        {GameState.Showdown, "You found a Royal Flush! You are awarded 50 credits."}
-    };
+        base.OnInitialized();
+        GameStateManager.OnGameStateChange += HandleGameState;
+        GameStateManager.OnGameStateChange += StateHasChanged;
 
-    private void navigateTo(string uri)
+        GameStateManager.InitializeGameState();
+    }
+
+    private void HandleGameState()
+    {
+        Action currentStateHandler = GameStateManager.GameStateHandlers[GameStateManager.CurrentState];
+        currentStateHandler();
+    }
+
+   
+    private void NavigateTo(string uri)
     {
         Navigator.NavigateTo(uri);
     }
 
-    private List<Card> GetCards()
-    {
-        AdvanceGameState();
 
-        return Dealer.DealCards(5);
-    }
-
-    private void AdvanceGameState()
+    public void Dispose()
     {
-        GameState[] gameStates =  Enum.GetValues<GameState>();
-        CurrentState = gameStates[((int)CurrentState + 1) % gameStates.Length];
-        DealerDialogue.TryGetValue(CurrentState, out String newDialogue);
-        CurrentDialogue = newDialogue;
+        GameStateManager.OnGameStateChange -= StateHasChanged;
     }
 }

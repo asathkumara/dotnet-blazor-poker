@@ -1,24 +1,29 @@
-﻿<section class="player-hand">
+﻿@inject GameStateManager GameStateManager
 
-    @if (Cards is not null)
+<section class="player-hand">
+
+
+    @for (int cardIndex = 0; cardIndex < Hand.Count(); cardIndex++)
     {
-        @foreach(Card card in Cards)
-        {
-            <CardItem Card=card/>
-        }
-    }
-    else
-    {
-        @for(int i = 1; i <= 5; i++)
-        {
-            <CardItem Card=null/>
-        }
+        <CardItem 
+            Card=Hand[cardIndex] 
+            IsVisible=@IsVisible 
+            IsSelectable=@IsSelectable 
+            Index=@cardIndex 
+        />
     }
    
 </section>
 
 @code 
 {
+
     [Parameter]
-    public List<Card> Cards { get; set; }
+    public Hand Hand { get; set; }
+
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    [Parameter]
+    public bool IsSelectable { get; set; } = false;
 }
