@@ -6,6 +6,8 @@ namespace DotnetBlazorPoker.Models
     {
         private List<Card> _cards;
 
+        public PokerHand PokerHand => PokerHandEvaluator.EvaluatePokerHand(_cards);
+
         public Hand(List<Card> cards)
         {
             _cards = cards;
@@ -16,6 +18,10 @@ namespace DotnetBlazorPoker.Models
             get
             {
                 return _cards[index];
+            }
+            set
+            {
+                _cards[index] = value;
             }
         }
 

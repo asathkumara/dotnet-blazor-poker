@@ -4,13 +4,15 @@ namespace DotnetBlazorPoker.Models
 {
     public class Deck : IEnumerable<Card>
     {
+        private const int MaxDeckSize = 52;
+
         private List<Card> _cards;
         private List<Card> _cachedCards;
 
         public Deck()
         {
-            _cards = new List<Card>();
-            _cachedCards = new List<Card>();
+            _cards = new List<Card>(MaxDeckSize);
+            _cachedCards = new List<Card>(MaxDeckSize);
 
             foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
