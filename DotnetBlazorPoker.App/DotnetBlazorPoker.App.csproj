@@ -25,4 +25,8 @@
     <ProjectReference Include="..\DotnetBlazorPoker.Models\DotnetBlazorPoker.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	<None Include="publish/wwwroot/vercel.json" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
