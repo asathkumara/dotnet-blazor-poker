@@ -23,6 +23,7 @@
 {
     grid-area: exit;
     justify-self: center;
+    align-self: center;
     border: none;
     width: 50px;
     height: 30px;
@@ -66,7 +67,35 @@
     grid-area: chips;
 }
 
+.poker-chip
+{
+    width: 120px;
+    height: 120px;
+}
+
 .bet-confirm-button
 {
     grid-area: confirm;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) 
+{
+    .bet-menu
+    {
+        min-height: 100vh;
+        min-width: 100vw;
+    }
+
+    .poker-chip
+    {
+        width: 80px;
+        height: 80px;
+    }
+
+    .bet-confirm-button
+    {
+        height: 80px;
+    }
+
 }
