@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A simplified version of the five card draw poker variant built using .NET and Blazor WASM. 
+A simplified version of the five card draw poker variant built using .NET and Blazor WASM. This app is also a Progressive Web App (PWA) that can be installed on your device.
 
 ### Live demo available at https://dotnet-blazor-poker.vercel.app/
 
