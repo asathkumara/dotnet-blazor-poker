@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Evaluates a poker hand
+    /// </summary>
     public static class PokerHandEvaluator
     {
+        /// <summary>
+        /// The evaluator functions to be used
+        /// </summary>
         static List<Predicate<List<Card>>> _evaluators;
+
+        /// <summary>
+        /// The evaluations to be handed out for a poker hand
+        /// </summary>
         static Dictionary<string, PokerHand> _evaluations;
+
+        /// <summary>
+        /// The pairwise evaluator for ranks
+        /// </summary>
         static Func<Card, Card, bool> _pairwiseRankEvaluator;
 
-
+        /// <summary>
+        /// Initializes the PokerHandEvaluator
+        /// </summary>
         static PokerHandEvaluator()
         {
             _evaluators = new List<Predicate<List<Card>>>()
@@ -42,6 +58,11 @@ namespace DotnetBlazorPoker.Models
             _pairwiseRankEvaluator = (firstCard, secondCard) => (int)firstCard.Rank == (int)secondCard.Rank;
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Flush 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Flush; False otherwise</returns>
         public static bool IsFlush(List<Card> hand)
         {
             hand = hand.OrderBy(card => (int)card.Suit).ToList();
@@ -49,6 +70,11 @@ namespace DotnetBlazorPoker.Models
             return hand[0].Suit.Equals(hand[hand.Count - 1].Suit);
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Straight 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Straight; False otherwise</returns>
         public static bool IsStraight(List<Card> hand)
         {
             hand = hand.OrderBy(card => (int)card.Rank).ToList();
@@ -68,16 +94,31 @@ namespace DotnetBlazorPoker.Models
             return true;
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Straight Flush 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Straight Flush; False otherwise</returns>
         public static bool IsStraightFlush(List<Card> hand)
         {
             return IsStraight(hand) && IsFlush(hand);
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Royal Flush 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Royal Flush; False otherwise</returns>
         public static bool IsRoyalFlush(List<Card> hand)
         {
             return IsStraight(hand) && hand[hand.Count - 1].Rank.Equals(Rank.Ace);
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Full House 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Full House; False otherwise</returns>
         public static bool IsFullHouse(List<Card> hand)
         {
             hand.OrderBy(card => (int)card.Rank);
@@ -91,6 +132,11 @@ namespace DotnetBlazorPoker.Models
             return isLowFullHouse || isHighFullHouse;
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Four of a kind 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Four of a kind; False otherwise</returns>
         public static bool IsFourOfAKind(List<Card> hand)
         {
             hand = hand.OrderBy(card => (int)card.Rank).ToList();
@@ -101,6 +147,11 @@ namespace DotnetBlazorPoker.Models
             return isLowFourOfAKind || isHighFourOfAKind;
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Three of a kind 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Three of a kind; False otherwise</returns>
         public static bool IsThreeOfAKind(List<Card> hand)
         {
             hand = hand.OrderBy(card => (int)card.Rank).ToList();
@@ -112,6 +163,11 @@ namespace DotnetBlazorPoker.Models
             return isLowThreeOfAKind || isMidThreeOfAKind || isHighThreeOfAKind;
         }
 
+        /// <summary>
+        /// Evaluates the given hand for a Two Pair 
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated</param>
+        /// <returns>True if the given hand is a Two Pair; False otherwise</returns>
         public static bool IsTwoPair(List<Card> hand)
         {
             hand = hand.OrderBy(card => (int)card.Rank).ToList();
@@ -123,6 +179,15 @@ namespace DotnetBlazorPoker.Models
             return isLowTwoPair || isCornerTwoPair || isHighTwoPair;
         }
 
+        /// <summary>
+        /// Checks whether the given hand meets the criteria specified by the pairwise evaluator.
+        /// </summary>
+        /// <param name="hand">The hand to be evaluated pairwise</param>
+        /// <param name="startIndex">The index to start the evaluations at</param>
+        /// <param name="stopIndex">The index to stop the evaluations at</param>
+        /// <param name="pairwiseEvaluator">The pairwise evaluator to be used</param>
+        /// <param name="step">The increment to be used for the evaluations</param>
+        /// <returns>True if the hand meets the evaluator's criteria; False otherwise.</returns>
         private static bool IsPairwise(List<Card> hand, int startIndex, int stopIndex, Func<Card, Card, bool> pairwiseEvaluator, int step = 1)
         {
             bool isPairwise = true;
@@ -140,6 +205,11 @@ namespace DotnetBlazorPoker.Models
             return isPairwise;
         }
 
+        /// <summary>
+        /// Evaluates the given list of cards for a Poker Hand
+        /// </summary>
+        /// <param name="cards">The cards to be evaluated</param>
+        /// <returns>The Poker Hand of the cards</returns>
         public static PokerHand EvaluatePokerHand(List<Card> cards)
         {
             foreach (Predicate<List<Card>> handEvaluator in _evaluators)

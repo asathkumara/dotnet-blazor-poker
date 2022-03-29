@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Contains extensions for the Poker Hand enum
+    /// </summary>
     public static class PokerHandExtensions
     {
+        /// <summary>
+        /// Converts the PokerHand value to a readable string
+        /// </summary>
+        /// <param name="pokerHand">The Poker Hand value to be converted</param>
+        /// <returns>A readable string representation of the Poker Hand</returns>
         public static string ToReadableString(this PokerHand pokerHand)
         {
             switch (pokerHand)

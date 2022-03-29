@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Manages the Game's state.
+    /// </summary>
     public class GameStateManager
     {
         private const int MaxHandSize = 5;
         private const decimal InitialBalance = 3000;
        
+        /// <summary>
+        /// The multipliers to be used when awarding credits
+        /// </summary>
         public Dictionary<PokerHand, decimal> PokerHandMultipliers { get; private set; }
 
+        /// <summary>
+        /// The handlers to be used on a given state
+        /// </summary>
         public Dictionary<GameState, Action> GameStateHandlers { get; private set; }
 
         public Player Player { get; set; }
@@ -29,6 +38,9 @@ namespace DotnetBlazorPoker.Models
 
         public List<int> CurrentDiscardIndices { get; set; }
 
+        /// <summary>
+        /// Constructs a GameStateManager
+        /// </summary>
         public GameStateManager()
         {
             PokerHandMultipliers = new Dictionary<PokerHand, decimal>()
@@ -56,6 +68,10 @@ namespace DotnetBlazorPoker.Models
             Dealer = new Dealer();
             CurrentDiscardIndices = new List<int>();
         }
+
+        /// <summary>
+        /// The handler for when the game's state is on Deal
+        /// </summary>
         public void DealStateHandler()
         {
             CurrentDialogue = "You were dealt a hand.";
@@ -63,18 +79,27 @@ namespace DotnetBlazorPoker.Models
             CurrentBet = 0;
         }
 
+        /// <summary>
+        /// The handler for when the game's state is on Bet
+        /// </summary>
         public void BetStateHandler()
         {
             CurrentDialogue = "Place your bets.";
 
         }
 
+        /// <summary>
+        /// The handler for when the game's state is on Draw
+        /// </summary>
         public void DrawStateHandler()
         {
             Player.Balance -= CurrentBet;
             CurrentDialogue = "Select upto 3 cards to redraw";
         }
 
+        /// <summary>
+        /// The handler for when the game's state is on Showdown
+        /// </summary>
         public void ShowdownStateHandler()
         {
             AcceptRedraws();
@@ -85,12 +110,18 @@ namespace DotnetBlazorPoker.Models
             CurrentDiscardIndices.Clear();
         }
 
+        /// <summary>
+        /// Initializes the Game State
+        /// </summary>
         public void InitializeGameState()
         {
             CurrentState = GameState.Deal;
             OnGameStateChange?.Invoke();
         }
 
+        /// <summary>
+        /// Advances the Game State
+        /// </summary>
         public void AdvanceGameState()
         {
             GameState[] gameStates = Enum.GetValues<GameState>();
@@ -99,7 +130,10 @@ namespace DotnetBlazorPoker.Models
             OnGameStateChange?.Invoke();
         }
 
-        public void AcceptRedraws()
+        /// <summary>
+        /// Accepts the redraws from the player
+        /// </summary>
+        private void AcceptRedraws()
         {
             foreach (int index in CurrentDiscardIndices)
             {
@@ -107,7 +141,12 @@ namespace DotnetBlazorPoker.Models
             }
         }
 
-        public decimal AwardCredits(Player player)
+        /// <summary>
+        /// Awards credits to the given player
+        /// </summary>
+        /// <param name="player">The player to be awarded credits to</param>
+        /// <returns>The amount of credits awarded</returns>
+        private decimal AwardCredits(Player player)
         {
             decimal credits = (int)(CurrentBet * PokerHandMultipliers[player.Hand.PokerHand]);
 

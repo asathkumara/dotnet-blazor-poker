@@ -2,6 +2,10 @@
 
 namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Represents a deck of playing cards
+    /// </summary>
+    /// <remarks>Extends enumerable functionality on the cards</remarks>
     public class Deck : IEnumerable<Card>
     {
         private const int MaxDeckSize = 52;
@@ -9,6 +13,10 @@ namespace DotnetBlazorPoker.Models
         private List<Card> _cards;
         private List<Card> _cachedCards;
 
+        /// <summary>
+        /// Constructs a deck of 52 playing cards
+        /// </summary>
+        /// <remarks>The deck is cached to optimize for resetting</remarks>
         public Deck()
         {
             _cards = new List<Card>(MaxDeckSize);
@@ -24,6 +32,11 @@ namespace DotnetBlazorPoker.Models
             }
         }
 
+        /// <summary>
+        /// Retrieves a card at the given index
+        /// </summary>
+        /// <param name="index">The index of the card</param>
+        /// <returns>The card at the given index</returns>
         public Card this[int index]
         {
             get
@@ -36,13 +49,21 @@ namespace DotnetBlazorPoker.Models
             }
         }
 
+        /// <summary>
+        /// Retrieves the top card on the deck
+        /// </summary>
+        /// <returns>The card on the top of the deck</returns>
         public Card Pop()
         {
             Card topCard = _cards[0];
             _cards.RemoveAt(0);
+
             return topCard;
         }
 
+        /// <summary>
+        /// Resets the deck
+        /// </summary>
         public void Reset()
         {
             _cards.Clear();
