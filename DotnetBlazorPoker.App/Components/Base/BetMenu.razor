@@ -1,4 +1,5 @@
-﻿@inject GameStateManager GameStateManager
+﻿@inject IJSRuntime JS;
+@inject GameStateManager GameStateManager;
 
 @{
     string chip1 = "resources/images/chips/poker-chip-1-120x120.webp";
@@ -11,39 +12,55 @@
 
     <section class="bet-chips">
         <img 
+            @ref="pokerChip1"
             class="poker-chip"
             src=@chip1 
             alt="Poker chip worth 1 credit" 
             @onclick=@((mouseEvent) => BetHandler(mouseEvent, 1)) 
             @oncontextmenu:preventDefault
             @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
+            draggable="false"
+            data-tilt
+            data-tilt-scale="1.2"
         />
 
         <img 
+            @ref="pokerChip5"
             class="poker-chip"
             src=@chip5
             alt="Poker chip worth 5 credits" 
             @onclick=@((mouseEvent) => BetHandler(mouseEvent, 5))
             @oncontextmenu:preventDefault
             @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
+            draggable="false"
+            data-tilt
+            data-tilt-scale="1.2"
         />
 
         <img 
+            @ref="pokerChip25"
             class="poker-chip"
             src=@chip25 
             alt="Poker chip worth 25 credits" 
             @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25)) 
             @oncontextmenu:preventDefault
             @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
+            draggable="false"
+            data-tilt
+            data-tilt-scale="1.2"
         />
 
         <img 
+            @ref="pokerChip100"
             class="poker-chip"
             src=@chip100 
             alt="Poker chip worth 100 credits" 
             @onclick=@((mouseEvent) => BetHandler(mouseEvent, 100))
             @oncontextmenu:preventDefault
             @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
+            draggable="false"
+            data-tilt
+            data-tilt-scale="1.2"
         />
     </section>
 
@@ -57,10 +74,29 @@
 
 @code 
 {
+    private IJSObjectReference _vanillaTilt;
+    private ElementReference pokerChip1;
+    private ElementReference pokerChip5;
+    private ElementReference pokerChip25;
+    private ElementReference pokerChip100;
+
     [Parameter]
     public EventCallback OnClose { get; set; }
 
     public int CurrentBet { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
+
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip1);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip5);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip25);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip100);
+        }
+    }
 
     private void BetHandler(MouseEventArgs mouseEvent, int credits)
     {

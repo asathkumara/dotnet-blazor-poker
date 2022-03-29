@@ -71,6 +71,13 @@
 {
     width: 120px;
     height: 120px;
+    user-select: none;
+
+}
+
+.poker-chip:hover
+{
+    cursor: pointer;
 }
 
 .bet-confirm-button
