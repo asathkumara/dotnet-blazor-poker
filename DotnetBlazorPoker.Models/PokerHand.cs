@@ -1,5 +1,8 @@
 ﻿namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Represents the PokerHands.
+    /// </summary>
     public enum PokerHand
     {
         TwoPair = 0,

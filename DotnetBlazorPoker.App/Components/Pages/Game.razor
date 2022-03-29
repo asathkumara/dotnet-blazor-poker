@@ -6,38 +6,12 @@
     <Logo />
     <DialogueBox DialogueText=@GameStateManager.CurrentDialogue/>
 
-    @if (GameStateManager.CurrentState == GameState.Deal)
-    {
-        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=false />
-    }
-
-    @if (GameStateManager.CurrentState == GameState.Bet)
-    {
-        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
-    }
-
-    @if (GameStateManager.CurrentState == GameState.Draw)
-    {
-        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true IsSelectable=true/>
-    }
-
-    @if (GameStateManager.CurrentState == GameState.Showdown)
-    {
-        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
-    }
-
-    <section class="user-balance">
+     <section class="user-balance">
         <h1>Balance</h1>
         <p>@GameStateManager.Player.Balance</p>
     </section>
 
-
-    <section class="user-actions">
-        <button class="user-action" @onclick=@(() => ShowBetMenu())>Bet</button>
-        <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Hold</button>
-    </section>
-
-    <aside class="left-info">
+      <aside class="left-info">
         <article class="poker-hand-info">
             <h2>Royal Flush</h2>
             <p>0.9</p>
@@ -80,6 +54,49 @@
             <p>0.2</p>
         </article>
     </aside>
+
+    @if (GameStateManager.CurrentState == GameState.Deal)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=false />
+
+        <section class="user-actions">
+            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Reveal</button>
+        </section>
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Bet)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
+
+        <section class="user-actions">
+            <button class="user-action" @onclick=@(() => ShowBetMenu())>Bet</button>
+        </section>
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Draw)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true IsSelectable=true/>
+
+        <section class="user-actions">
+            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Confirm</button>
+         </section>
+    }
+
+    @if (GameStateManager.CurrentState == GameState.Showdown)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
+
+        <section class="user-actions">
+            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Deal</button>
+        </section>
+    }
+
+   
+
+
+    
+
+  
 
     <button class="exit-game" @onclick=@(() => NavigateTo("/"))>X</button>
 

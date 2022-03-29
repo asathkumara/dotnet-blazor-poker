@@ -1,5 +1,8 @@
 ﻿namespace DotnetBlazorPoker.Models
 {
+    /// <summary>
+    /// Represents the Rank of the card
+    /// </summary>
     public enum Rank
     {
         Two = 2,
