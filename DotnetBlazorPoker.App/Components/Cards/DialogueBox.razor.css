@@ -32,6 +32,8 @@
 
 .dialogue-button
 {
+    display: none;
+
     width: 100px;
     min-height: 40px;
     font-size: 15px;
@@ -57,5 +59,10 @@
 
         position: fixed;
         z-index: 1;
+    }
+
+    .dialogue-button
+    {
+        display: block;
     }
 }

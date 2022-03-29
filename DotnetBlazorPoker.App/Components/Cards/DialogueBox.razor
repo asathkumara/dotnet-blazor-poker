@@ -1,15 +1,20 @@
-﻿<div class="dialogue-box">
-    <img class="dialogue-avatar" src=@AvatarSrc alt="A picture of the speaker" draggable="false" />
-    <div class="dialogue">
-        <h2 class="speaker">@Speaker</h2>
-        <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
-        @*<kbd>SPACE</kbd>*@
-        @*<button class="dialogue-button">OK</button>*@
+﻿@if (IsDialogueVisible)
+{
+    <div class="dialogue-box">
+        <img class="dialogue-avatar" src=@AvatarSrc alt="A picture of the speaker" draggable="false" />
+        <div class="dialogue">
+            <h2 class="speaker">@Speaker</h2>
+            <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
+            <button class="dialogue-button" @onclick=@HideDialogueBox>OK</button>
+        </div>
     </div>
-</div>
+}
+
 
 @code 
 {
+    public bool IsDialogueVisible { get; set; }
+
     [Parameter]
     public string AvatarSrc { get; set; } = "resources/images/jack-avatar.webp";
 
@@ -18,4 +23,29 @@
 
     [Parameter]
     public string DialogueText { get; set; } = "Hello World";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        IsDialogueVisible = true;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        IsDialogueVisible = true;
+    }
+
+    private void HideDialogueBox()
+    {
+        IsDialogueVisible = false;
+    }
+
+    private void ShowDialogueBox()
+    {
+        IsDialogueVisible = true;
+    }
+
 }
