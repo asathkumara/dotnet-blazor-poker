@@ -17,6 +17,8 @@ namespace DotnetBlazorPoker.Models
 
         public Player Player { get; set; }
 
+        public int CurrentBet { get; set; }
+
         public Dealer Dealer { get; set; }
 
         public string CurrentDialogue { get; set; }
@@ -58,6 +60,7 @@ namespace DotnetBlazorPoker.Models
         {
             CurrentDialogue = "You were dealt a hand.";
             Player.Hand = new Hand(Dealer.DealCards(MaxHandSize));
+            CurrentBet = 0;
         }
 
         public void BetStateHandler()
@@ -68,6 +71,7 @@ namespace DotnetBlazorPoker.Models
 
         public void DrawStateHandler()
         {
+            Player.Balance -= CurrentBet;
             CurrentDialogue = "Select upto 3 cards to redraw";
         }
 
@@ -75,7 +79,7 @@ namespace DotnetBlazorPoker.Models
         {
             AcceptRedraws();
 
-            decimal credits = AwardCredits(Player, 10);
+            decimal credits = AwardCredits(Player);
             CurrentDialogue = $"{Player.Hand.PokerHand.ToReadableString()}! You were awarded {credits} credits.";
 
             CurrentDiscardIndices.Clear();
@@ -103,9 +107,9 @@ namespace DotnetBlazorPoker.Models
             }
         }
 
-        public decimal AwardCredits(Player player, decimal betAmount)
+        public decimal AwardCredits(Player player)
         {
-            decimal credits = (int)(betAmount * PokerHandMultipliers[player.Hand.PokerHand]);
+            decimal credits = (int)(CurrentBet * PokerHandMultipliers[player.Hand.PokerHand]);
 
             player.Balance += credits;
             return credits;

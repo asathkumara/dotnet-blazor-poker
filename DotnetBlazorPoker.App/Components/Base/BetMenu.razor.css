@@ -1,0 +1,72 @@
+﻿.bet-menu 
+{
+    display: grid;
+    grid-template:
+        [header-left] ". . exit" [header-right]
+        [content-left] "chips chips chips" [content-right]
+        [content-left] "betDisplay betDisplay betDisplay" [content-right]
+        [footer-left] "confirm confirm confirm" [footer-right];
+
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border-radius: 25px;
+
+    z-index: 2;
+    position: fixed;
+    min-width: 50rem;
+
+    justify-self: center;
+    align-self: center;
+}
+
+.exit-bet-menu 
+{
+    grid-area: exit;
+    justify-self: center;
+    border: none;
+    width: 50px;
+    height: 30px;
+    transition: none;
+}
+
+.exit-bet-menu:hover 
+{
+    background-color: black;
+    color: var(--color-white);
+}
+
+.bet-chips,
+.bet-display,
+.bet-confirm-button
+{
+    justify-self: center;
+    margin-bottom: 30px;
+}
+
+.bet-display 
+{
+    grid-area: betDisplay;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.bet-display-current
+{
+    font-size: var(--font-small);
+    margin-bottom: 10px;
+}
+
+.bet-display-info
+{
+     
+}
+
+.bet-chips
+{
+    grid-area: chips;
+}
+
+.bet-confirm-button
+{
+    grid-area: confirm;
+}

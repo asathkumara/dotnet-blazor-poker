@@ -33,7 +33,7 @@
 
 
     <section class="user-actions">
-        <button class="user-action">Bet</button>
+        <button class="user-action" @onclick=@(() => ShowBetMenu())>Bet</button>
         <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Hold</button>
     </section>
 
@@ -82,17 +82,33 @@
     </aside>
 
     <button class="exit-game" @onclick=@(() => NavigateTo("/"))>X</button>
+
+    @if (IsBetMenuVisible)
+    {
+        <BetMenu OnClose=@HideBetMenu />
+    }
+
 </main>
 
 @code 
 {
+    public bool IsBetMenuVisible { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        IsBetMenuVisible = false;
+
         GameStateManager.OnGameStateChange += HandleGameState;
         GameStateManager.OnGameStateChange += StateHasChanged;
 
         GameStateManager.InitializeGameState();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
     }
 
     private void HandleGameState()
@@ -101,7 +117,19 @@
         currentStateHandler();
     }
 
-   
+    private void ShowBetMenu()
+    {
+        if (GameStateManager.CurrentState == GameState.Bet)
+        {
+            IsBetMenuVisible = true;
+        }
+    }
+
+    private void HideBetMenu()
+    {
+        IsBetMenuVisible = false;
+    }
+
     private void NavigateTo(string uri)
     {
         Navigator.NavigateTo(uri);

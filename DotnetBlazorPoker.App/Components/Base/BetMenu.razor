@@ -1,0 +1,105 @@
+﻿@inject GameStateManager GameStateManager
+
+@{
+    string chip1 = "resources/images/chips/poker-chip-1-120x120.webp";
+    string chip5 = "resources/images/chips/poker-chip-5-120x120.webp";
+    string chip25 = "resources/images/chips/poker-chip-25-120x120.webp";
+    string chip100 = "resources/images/chips/poker-chip-100-120x120.webp";
+}
+<div class="bet-menu">
+    <button class="exit-bet-menu" @onclick=@OnClose>X</button>
+
+    <section class="bet-chips">
+        <img 
+            src=@chip1 
+            alt="Poker chip worth 1 credit" 
+            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 1)) 
+            @oncontextmenu:preventDefault
+            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
+        />
+
+        <img 
+            src=@chip5
+            alt="Poker chip worth 5 credits" 
+            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 5))
+            @oncontextmenu:preventDefault
+            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
+        />
+
+        <img 
+            src=@chip25 
+            alt="Poker chip worth 25 credits" 
+            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25)) 
+            @oncontextmenu:preventDefault
+            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
+        />
+
+        <img 
+            src=@chip100 
+            alt="Poker chip worth 100 credits" 
+            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 100))
+            @oncontextmenu:preventDefault
+            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
+        />
+    </section>
+
+    <section class="bet-display">
+        <h2 class="bet-display-current">You Are Betting @CurrentBet Credits</h2>
+        <p class="bet-display-info"><kdb>Left Click</kdb> (+)  <kdb>Right Click</kdb> (-)</p>
+    </section>
+
+    <button class="bet-confirm-button" @onclick=@ConfirmBet>Confirm</button>
+</div>
+
+@code 
+{
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    public int CurrentBet { get; set; }
+
+    private void BetHandler(MouseEventArgs mouseEvent, int credits)
+    {
+        switch (mouseEvent.Button)
+        {
+            case 0:
+                IncreaseBet(credits);
+                break;
+            case 2:
+                DecreaseBet(credits);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void IncreaseBet(int credits)
+    {
+        if ((CurrentBet + credits) > GameStateManager.Player.Balance)
+        {
+            return;
+        }
+
+        CurrentBet += credits;
+    }
+
+    private void DecreaseBet(int credits)
+    {
+        if ((CurrentBet - credits) < 0)
+        {
+            return;
+        }
+
+        CurrentBet -= credits;
+    }
+
+    private void ConfirmBet()
+    {
+        GameStateManager.CurrentBet = CurrentBet;
+        GameStateManager.AdvanceGameState();
+        OnClose.InvokeAsync();
+    }
+
+
+}
