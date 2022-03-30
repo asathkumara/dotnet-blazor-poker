@@ -61,3 +61,22 @@ button:hover
 .blazor-error-boundary::after {
     content: "An error has occurred."
 }
+
+.loader-container
+{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader 
+{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 32px 0 #fff, -32px 0 #fff;
+    position: relative;
+    animation: flash 0.5s ease-out infinite alternate;
+}
