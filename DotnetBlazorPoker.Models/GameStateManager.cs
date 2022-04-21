@@ -61,7 +61,8 @@ namespace DotnetBlazorPoker.Models
                 { GameState.Deal, DealStateHandler},
                 { GameState.Bet, BetStateHandler},
                 { GameState.Draw, DrawStateHandler},
-                { GameState.Showdown, ShowdownStateHandler}
+                { GameState.Showdown, ShowdownStateHandler},
+                { GameState.GameOver, GameOverHandler},
             };
 
             Player = new Player(InitialBalance);
@@ -108,6 +109,20 @@ namespace DotnetBlazorPoker.Models
             CurrentDialogue = $"{Player.Hand.PokerHand.ToReadableString()}! You were awarded {credits} credits.";
 
             CurrentDiscardIndices.Clear();
+
+            if (Player.Balance == 0)
+            {
+                CurrentState = GameState.GameOver;
+                OnGameStateChange?.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// The handler for when the game's state is on Draw
+        /// </summary>
+        public void GameOverHandler()
+        {
+            CurrentDialogue = "Game Over";
         }
 
         /// <summary>
@@ -115,6 +130,11 @@ namespace DotnetBlazorPoker.Models
         /// </summary>
         public void InitializeGameState()
         {
+            if (Player.Balance == 0)
+            {
+                Player.Balance = InitialBalance;
+            }
+
             CurrentState = GameState.Deal;
             OnGameStateChange?.Invoke();
         }
@@ -122,10 +142,11 @@ namespace DotnetBlazorPoker.Models
         /// <summary>
         /// Advances the Game State
         /// </summary>
+        /// <remarks>Cycles through available game states excluding the game over</remarks>
         public void AdvanceGameState()
         {
             GameState[] gameStates = Enum.GetValues<GameState>();
-            CurrentState = gameStates[((int)CurrentState + 1) % gameStates.Length];
+            CurrentState = gameStates[((int)CurrentState + 1) % (gameStates.Length - 1)];
 
             OnGameStateChange?.Invoke();
         }
@@ -150,7 +171,12 @@ namespace DotnetBlazorPoker.Models
         {
             decimal credits = (int)(CurrentBet * PokerHandMultipliers[player.Hand.PokerHand]);
 
-            player.Balance += credits;
+            if (credits > 0)
+            {
+                credits += CurrentBet;
+                player.Balance += credits;
+            }
+
             return credits;
         }
     }

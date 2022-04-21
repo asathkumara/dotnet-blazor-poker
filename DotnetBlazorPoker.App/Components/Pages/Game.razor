@@ -1,6 +1,8 @@
 ﻿@page "/start"
 @inject GameStateManager GameStateManager
 @inject NavigationManager Navigator
+@inject IJSRuntime JS;
+
 
 <main class="content">
     <Logo />
@@ -8,7 +10,7 @@
 
      <section class="user-balance">
         <h1>Balance</h1>
-        <p>@GameStateManager.Player.Balance</p>
+        <p @ref=@_balanceReference>@GameStateManager.Player.Balance</p>
     </section>
 
       <aside class="left-info">
@@ -91,24 +93,30 @@
         </section>
     }
 
-   
+    @if (GameStateManager.CurrentState == GameState.GameOver)
+    {
+        <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
-
-    
-
-  
+        <section class="user-actions">
+            <button class="user-action" @onclick=@(() => GameStateManager.InitializeGameState())>Buy In</button>
+        </section>
+    }
 
     <button class="exit-game" @onclick=@(() => NavigateTo("/"))>X</button>
 
     @if (IsBetMenuVisible)
     {
-        <BetMenu OnClose=@HideBetMenu />
+        <BetMenu OnClose=@HideBetMenu 
+        />
     }
 
 </main>
 
 @code 
 {
+    private IJSObjectReference _animationHelpers;
+    private ElementReference _balanceReference;
+
     public bool IsBetMenuVisible { get; set; }
 
     protected override void OnInitialized()
@@ -123,9 +131,9 @@
         GameStateManager.InitializeGameState();
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnAfterRender(firstRender);
+        _animationHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/animationHelpers.js" );
     }
 
     private void HandleGameState()
@@ -147,14 +155,29 @@
         IsBetMenuVisible = false;
     }
 
+    private async void IncrementBalance()
+    {
+        await _animationHelpers.InvokeVoidAsync("incrementCounter", _balanceReference);
+    }
+
+     private async void DecrementBalance(int target)
+    {
+        await  _animationHelpers.InvokeVoidAsync("decrementCounter", _balanceReference, target);
+    }
+
     private void NavigateTo(string uri)
     {
         Navigator.NavigateTo(uri);
     }
 
+    private void ExitGame()
+    {
+        Navigator.NavigateTo("/");
+    }
 
     public void Dispose()
     {
+        GameStateManager.OnGameStateChange -= HandleGameState;
         GameStateManager.OnGameStateChange -= StateHasChanged;
     }
 }

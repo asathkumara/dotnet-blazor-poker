@@ -1,4 +1,4 @@
-﻿.bet-menu 
+.bet-menu 
 {
     display: grid;
     grid-template:
@@ -57,10 +57,7 @@
     margin-bottom: 10px;
 }
 
-.bet-display-info
-{
-     
-}
+
 
 .bet-chips
 {
@@ -92,6 +89,7 @@
     {
         min-height: 100vh;
         min-width: 100vw;
+        border-radius: 0px;
     }
 
     .poker-chip
@@ -105,4 +103,8 @@
         height: 80px;
     }
 
+    .bet-display-info
+    {
+        display: none;
+    }
 }

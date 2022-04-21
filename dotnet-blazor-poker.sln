@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetBlazorPoker.App", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetBlazorPoker.Models", "DotnetBlazorPoker.Models\DotnetBlazorPoker.Models.csproj", "{ADF1F029-2893-455A-B681-CFCAB7F82903}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetBlazorPoker.Models.UnitTests", "DotnetBlazorPoker.Models.UnitTests\DotnetBlazorPoker.Models.UnitTests.csproj", "{38F6D998-0C18-470D-8562-4DE5876347EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetBlazorPoker.Models.UnitTests", "DotnetBlazorPoker.Models.UnitTests\DotnetBlazorPoker.Models.UnitTests.csproj", "{38F6D998-0C18-470D-8562-4DE5876347EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

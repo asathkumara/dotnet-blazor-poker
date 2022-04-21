@@ -1,9 +1,12 @@
 ﻿.content 
 {
+    min-height: 100vh;
     display: grid;
     grid-template:
         [header-left] "logo" [header-right]
         [content-left] "content" [content-right];
+
+    align-content: center;
 }
 
 ::deep picture 

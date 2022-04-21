@@ -2,6 +2,10 @@
 {
     margin: 0 auto;
     grid-area: middle;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* Extra small devices (phones, 600px and down) */

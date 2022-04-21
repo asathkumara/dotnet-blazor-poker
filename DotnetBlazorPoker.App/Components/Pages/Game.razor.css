@@ -1,5 +1,7 @@
-﻿.content 
+.content 
 {
+    min-height: 100vh;
+    
     display: grid;
     grid-template:
         [header-left] "logo dialogue exit" [header-right]

@@ -8,7 +8,8 @@
         Deal = 0,
         Bet,
         Draw,
-        Showdown
+        Showdown,
+        GameOver
     }
 
 }

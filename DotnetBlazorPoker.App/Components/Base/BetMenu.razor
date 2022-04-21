@@ -83,6 +83,9 @@
     [Parameter]
     public EventCallback OnClose { get; set; }
 
+    //[Parameter]
+    //public EventCallback<int> OnCreditsReceived { get; set; }
+
     public int CurrentBet { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -137,6 +140,7 @@
     private void ConfirmBet()
     {
         GameStateManager.CurrentBet = CurrentBet;
+        //OnCreditsReceived.InvokeAsync((int)GameStateManager.Player.Balance  - CurrentBet);
         GameStateManager.AdvanceGameState();
         OnClose.InvokeAsync();
     }
