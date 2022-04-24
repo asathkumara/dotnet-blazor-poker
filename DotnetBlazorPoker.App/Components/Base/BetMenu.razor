@@ -1,67 +1,95 @@
 ﻿@inject IJSRuntime JS;
 @inject GameStateManager GameStateManager;
 
-@{
-    string chip1 = "resources/images/chips/poker-chip-1-120x120.webp";
-    string chip5 = "resources/images/chips/poker-chip-5-120x120.webp";
-    string chip25 = "resources/images/chips/poker-chip-25-120x120.webp";
-    string chip100 = "resources/images/chips/poker-chip-100-120x120.webp";
-}
 <div class="bet-menu">
     <button class="exit-bet-menu" @onclick=@OnClose>X</button>
 
     <section class="bet-chips">
-        <img 
-            @ref="pokerChip1"
-            class="poker-chip"
-            src=@chip1 
-            alt="Poker chip worth 1 credit" 
-            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 1)) 
-            @oncontextmenu:preventDefault
-            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
-            draggable="false"
-            data-tilt
-            data-tilt-scale="1.2"
-        />
+        <picture>
+            <source 
+                type="image/webp"
+                srcset=@(GetSource("webp", 1))
+            />
+            
+            <img 
+                @ref="pokerChip1"
+                class="poker-chip"
+                src=@(GetSource("png", 1)) 
+                alt="Poker chip worth 1 credit" 
+                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 1)) 
+                @oncontextmenu:preventDefault
+                @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
+                draggable="false"
+                data-tilt
+                data-tilt-scale="1.2"
+            />
+        </picture>
+        
 
-        <img 
-            @ref="pokerChip5"
-            class="poker-chip"
-            src=@chip5
-            alt="Poker chip worth 5 credits" 
-            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 5))
-            @oncontextmenu:preventDefault
-            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
-            draggable="false"
-            data-tilt
-            data-tilt-scale="1.2"
-        />
+        <picture>
+            <source 
+                type="image/webp"
+                srcset=@(GetSource("webp", 5))
+            />
 
-        <img 
-            @ref="pokerChip25"
-            class="poker-chip"
-            src=@chip25 
-            alt="Poker chip worth 25 credits" 
-            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25)) 
-            @oncontextmenu:preventDefault
-            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
-            draggable="false"
-            data-tilt
-            data-tilt-scale="1.2"
-        />
+             <img 
+                @ref="pokerChip5"
+                class="poker-chip"
+                src=@(GetSource("png", 5))
+                alt="Poker chip worth 5 credits" 
+                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 5))
+                @oncontextmenu:preventDefault
+                @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
+                draggable="false"
+                data-tilt
+                data-tilt-scale="1.2"
+            />
+        </picture>
 
-        <img 
-            @ref="pokerChip100"
-            class="poker-chip"
-            src=@chip100 
-            alt="Poker chip worth 100 credits" 
-            @onclick=@((mouseEvent) => BetHandler(mouseEvent, 100))
-            @oncontextmenu:preventDefault
-            @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
-            draggable="false"
-            data-tilt
-            data-tilt-scale="1.2"
-        />
+        <picture>
+            <source 
+                type="image/webp"
+                srcset=@(GetSource("webp", 25))
+            />
+
+            <img 
+                @ref="pokerChip25"
+                class="poker-chip"
+                src=@(GetSource("png", 25)) 
+                alt="Poker chip worth 25 credits" 
+                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25)) 
+                @oncontextmenu:preventDefault
+                @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
+                draggable="false"
+                data-tilt
+                data-tilt-scale="1.2"
+            />
+        </picture>
+
+        <picture>
+            <source 
+                type="image/webp"
+                srcset=@(GetSource("webp", 100))
+            />
+
+            <img 
+                @ref="pokerChip100"
+                class="poker-chip"
+                src=@(GetSource("png", 100)) 
+                alt="Poker chip worth 100 credits" 
+                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 100))
+                @oncontextmenu:preventDefault
+                @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
+                draggable="false"
+                data-tilt
+                data-tilt-scale="1.2"
+            />
+        </picture>
+       
+
+        
+
+        
     </section>
 
     <section class="bet-display">
@@ -143,6 +171,11 @@
         //OnCreditsReceived.InvokeAsync((int)GameStateManager.Player.Balance  - CurrentBet);
         GameStateManager.AdvanceGameState();
         OnClose.InvokeAsync();
+    }
+
+    private string GetSource(string extension, int chipValue)
+    {
+        return $"resources/images/chips/poker-chip-{chipValue}-120x120.{extension}";
     }
 
 

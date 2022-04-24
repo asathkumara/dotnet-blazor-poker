@@ -1,14 +1,14 @@
-﻿html, body {
+html, body {
     font-family: var(--font-family);
 }
 
 body
 {
-    background-image: url("../../resources/images/poker-table-1920x1080.webp");
+    background-image: url("../../resources/images/poker-table-1920x1080.jpg");
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-}
+background-color: green;}
 
 button 
 {

@@ -3,28 +3,43 @@
 
 @if(IsSelectable)
 {
-    <img 
-        @ref="cardReference"
-        class="card" 
-        src=@(GetSource()) 
-        alt=@(GetAltText()) 
-        data-tilt
-        data-tilt-scale="1.2"
-        draggable="false"
-        @onclick=@(() => ToggleSelectedCard())
-    />
+    <picture>
+        <source 
+            type="image/webp"
+            srcset=@(GetSource("webp"))
+        />
+
+        <img 
+            @ref="cardReference"
+            class="card" 
+            src=@(GetSource("png")) 
+            alt=@(GetAltText()) 
+            data-tilt
+            data-tilt-scale="1.2"
+            draggable="false"
+            @onclick=@(() => ToggleSelectedCard())
+        />
+    </picture>
+    
 }
 else
 {
-    <img 
-        @ref="cardReference"
-        class="card" 
-        src=@(GetSource()) 
-        alt=@(GetAltText()) 
-        data-tilt
-        data-tilt-scale="1.2"
-        draggable="false"
-    />
+     <picture>
+        <source 
+            type="image/webp"
+            srcset=@(GetSource("webp"))
+        />
+
+        <img 
+            @ref="cardReference"
+            class="card" 
+            src=@(GetSource("png")) 
+            alt=@(GetAltText()) 
+            data-tilt
+            data-tilt-scale="1.2"
+            draggable="false"
+        />
+    </picture>
 }
 
 @code 
@@ -46,15 +61,31 @@ else
     [Parameter]
     public int Index { get; set; }
 
-    private string GetSource()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
+            _cardHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/cardHelpers.js" );
+
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", cardReference);
+        }
+
+        if (GameStateManager.CurrentState == GameState.Draw)
+        {
+            await _cardHelpers.InvokeVoidAsync("setPointer", cardReference);
+        }
+    }
+
+    private string GetSource(string extension)
     {
 
         if (IsVisible)
         {
-            return $"resources/images/cards/{Card}.webp";
+            return $"resources/images/cards/{Card}.{extension}";
         }
 
-        return "resources/images/cards/cover.webp";
+        return $"resources/images/cards/cover.{extension}";
     }
 
     private string GetAltText()
@@ -80,22 +111,6 @@ else
         {
             await _cardHelpers.InvokeVoidAsync("resetFilter", cardReference);
             GameStateManager.CurrentDiscardIndices.Remove(Index);
-        }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
-            _cardHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/cardHelpers.js" );
-
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", cardReference);
-        }
-
-        if (GameStateManager.CurrentState == GameState.Draw)
-        {
-            await _cardHelpers.InvokeVoidAsync("setPointer", cardReference);
         }
     }
 }
