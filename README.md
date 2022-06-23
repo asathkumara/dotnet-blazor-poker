@@ -1,24 +1,170 @@
-![image](https://i.gyazo.com/43d56ee978c177b0c79f31ba4797bbba.gif)
+![image](https://user-images.githubusercontent.com/28933557/175179746-b8adb190-f6a8-480d-9dae-fd6fc9793223.png)
 
-## Introduction
+<table >
+    <tr>
+        <th>Roles</th>
+        <th>Deliverables</th>
+        <th>Project Specifications</th>
+    </tr>
+    <tr>
+        <td style="">
+            <p >I assumed the following roles when designing this app:</p>
+            <ul>
+                <li>Full-Stack Developer</li>
+                <li>User Experience (UX) Designer</li>
+                <li>User Interface (UI) Designer</li>
+                <li>Interaction (IxD) Designer</li>
+            </ul>
+        </td>
+        <td style="">
+           <p>Full-Stack Development: Progressive web application (PWA) built using .NET and Blazor Webassembly (WASM)</p>
+            <p>Interaction Design: High-fidelity prototypes for key tasks on desktop and mobile.</p>
+            <p>UX/UI Design:</p>
+            <ul>
+                <li>UI Kit</li>
+                <li>High-fidelity mockups and prototypes</li>
+            </ul>
+        </td>
+        <td style="">
+           <p>Duration: 2 weeks to port to Blazor Webassembly and refactor initial console application which was 2 years old</p>
+           <p>This project is still undergoing development</p>
+           <p>Tools</p>
+           <ul>
+                <li>Figma</li>
+                <li>Photoshop</li>
+            </ul>
+        </td>
+    </tr>    
+</table>
 
-A simplified version of the five card draw poker variant built using .NET and Blazor WASM. This app is also a Progressive Web App (PWA) that can be installed on your device.
+## Table of Contents
 
-### Live demo available at https://dotnet-blazor-poker.vercel.app/
+1. [Overview](#overview)
+2. [Gameplay](#gameplay)
+3. [Design](#design)
+4. [License](#license)
+
+
+## Overview
+
+This poker game is a simplified version of the Five-card draw (also known as the Cantrell draw) poker variant. While it is not as popular as seven-card stud or Texas hold'em, it is considered to be the best variant for new players.
+
+By simplifying the variant further and limiting the game to one player, this app intends to teach new players about the various poker hand rankings (such as Royal Flush, Straight Flush, etc.) as they go through the various rounds. 
+
+<a style="font-size: 20px" href="https://dotnet-blazor-poker.vercel.app" target="_blank">> Open game in new window</a>
 
 ## Gameplay
 
-![image](https://i.gyazo.com/60031314176cd29fabc606905561adf3.gif)
+The game begins with the player being dealt five cards, all face down, and a balance of 3000 credits. To ensure randomness, to an extent, the deck is shuffled using the [Fisher-Yates algorithm](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) and the top card is burned before dealing the initial hand.
 
-The gameplay loop is endless. Your goal is to maintain a positive balance of credits while trying to find the most valuable poker hand. During the draw round, you have the option to discard up to 3 cards from your hand.
-Once you redraw, your initial bet gets increased by a multiplier based on the rarity of the poker hand.
+Once the player picks up and reveals their cards, the betting round begins. Players can bet in increments of 1, 5, 25 and 100 as long as they the credits to do so. Once the bets are placed the dealer subtracts the credits from the player and adds it to the pot, initiating the draw round.
 
-The first version is lacking a couple of features and functionality.
+A common "house rule" in some places is that a player may not replace more than three cards. This rule is used in this game and is beneficial in helping slow the depletion of the deck. If the deck is ever depleted mid-game, the dealer will re-shuffle the deck and burn the top card. 
+
+Once the player confirms their selection of cards to redraw or keeps their hand, the showdown round begins revealing their hand's poker ranking. Credits awarded will be based on the bets placed during the betting round and the rarity of the poker hand:
+
+<table>
+    <tr>
+        <th>Ranking</th>
+        <th>Factor</th>
+    </tr>
+    <tr>
+        <td>
+            Royal Flush
+        </td>
+        <td>
+            0.9
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Straight Flush
+        </td>
+        <td>
+            0.8
+        </td>
+    </tr>
+    <tr>
+        <td>
+            4 Of A Kind
+        </td>
+        <td>
+            0.7
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Full House
+        </td>
+        <td>
+            0.6
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Straight
+        </td>
+        <td>
+            0.5
+        </td>
+    </tr>
+    <tr>
+        <td>
+           3 Of A Kind
+        </td>
+        <td>
+            0.4
+        </td>
+    </tr>
+    <tr>
+        <td>
+            2 Of A Kind
+        </td>
+        <td>
+            0.3
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Two Pair
+        </td>
+        <td>
+            0.2
+        </td>
+    </tr>
+</table>
+
+To put this into perspective: if you bet 150 credits on the betting round and received a Royal Flush on the showdown, you will be awarded 285 credits (150 + (150 * 0.9)). If your hand is a One Pair or a High Card, you will lose your initial bet. 
+
+Once the approriate number of credits are awarded, the player can request to be dealt another hand starting the gameplay loop. The game will continue until the player exits or exhausts their credits.
+
+Will you be crushed by the rng gods or prevail as the next blazor poker champ. Only time will tell and as always, gamble responsibly. 
+
+Note: The game currently does not explain the poker hands and does not include existing audio assets. In future updates, that functionality will be worked in.
+
+
+## Design
+
+[![Image from Gyazo](https://i.gyazo.com/6f581db8ccff804ac1302fa92cf1f754.gif)](https://gyazo.com/6f581db8ccff804ac1302fa92cf1f754)
+
+The focal point of any card game should be the cards and that heavily influenced my design choices. I also wanted a retro and vintage feel to the game (almost reminiscient of a NES or Namco Arcade game) so I started by developing a **UI Kit** to clarify the visual design. Details such as button states and typography were important to clearly define. 
+
+The background image evokes the feeling of the game being played on a poker table felt, establishing the primary color palette and allowing the cards to be the focal point.  The global use of the [Press Start 2P](https://www.dafont.com/press-start-2p.font) font captures that retro game feeling.
+
+ To increase interactivity with the cards, each card has a tilt effect when hovered, shifting their perspective from 2D into 3D.
+
+
+<a href="https://www.figma.com/file/OKXgCENx92rbdpcXpfznhh/Dotnet-Blazor-Poker-UI-Kit?node-id=0%3A1" target="_blank">> Open Figma UI Kit in new window</a>
+</br>
+
+**High fidelity prototypes** allowed me to test the key mechanics of the game and interactions with the UI. 
+
+<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A680&scaling=scale-down&page-id=206%3A2&starting-point-node-id=207%3A680" target="_blank">> Open Figma desktop high-fidelity prototype in new window</a>
+<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A697&scaling=min-zoom&page-id=207%3A696&starting-point-node-id=207%3A697" target="_blank">> Open Figma mobile high-fidelity prototype in new window</a>
+</br>
 
 ## License
 
-This project is licensed under [MIT](https://github.com/asathkumara/dotnet-blazor-poker/blob/master/LICENSE). Feel free to re-use any libraries or code for non-commercial use but do your due diligence when attributing credit.
+This project is licensed under [MIT](https://github.com/asathkumara/dotnet-blazor-poker/blob/master/LICENSE). Feel free to re-use any libraries or code for **non-commercial use** but do your due diligence with attributing credit.
 
-The images of the playing cards were adapted from https://www.improvemagic.com/all-playing-cards-names-with-pictures/ ,
-and the other royalty free assets were obtained from search engines and modified under fair use.
-
+The images for the playing cards were adapted from https://www.improvemagic.com/all-playing-cards-names-with-pictures/ and the project makes use of other royalty-free assets modified under fair use.
