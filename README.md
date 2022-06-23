@@ -57,7 +57,7 @@ By simplifying the variant further and limiting the game to one player, this app
 
 The game begins with the player being dealt five cards, all face down, and a balance of 3000 credits. To ensure randomness, to an extent, the deck is shuffled using the [Fisher-Yates algorithm](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) and the top card is burned before dealing the initial hand.
 
-Once the player picks up and reveals their cards, the betting round begins. Players can bet in increments of 1, 5, 25 and 100 as long as they the credits to do so. Once the bets are placed the dealer subtracts the credits from the player and adds it to the pot, initiating the draw round.
+Once the player picks up and reveals their cards, the betting round begins. Players can bet in increments of 1, 5, 25 and 100 as long as they have the credits to do so. Once the bets are placed the dealer subtracts the credits from the player and adds it to the pot, initiating the draw round.
 
 A common "house rule" in some places is that a player may not replace more than three cards. This rule is used in this game and is beneficial in helping slow the depletion of the deck. If the deck is ever depleted mid-game, the dealer will re-shuffle the deck and burn the top card. 
 
@@ -167,4 +167,4 @@ The background image evokes the feeling of the game being played on a poker tabl
 
 This project is licensed under [MIT](https://github.com/asathkumara/dotnet-blazor-poker/blob/master/LICENSE). Feel free to re-use any libraries or code for **non-commercial use** but do your due diligence with attributing credit.
 
-The images for the playing cards were adapted from https://www.improvemagic.com/all-playing-cards-names-with-pictures/ and the project makes use of other royalty-free assets modified under fair use.
+The images for the playing cards were adapted from [Improve Magic](https://www.improvemagic.com/all-playing-cards-names-with-pictures/) and the project makes use of other royalty-free assets modified under fair use.
