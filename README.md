@@ -37,6 +37,9 @@
     </tr>    
 </table>
 
+> The game is available at https://dotnet-blazor-poker.vercel.app/
+
+
 ## Table of Contents
 
 1. [Overview](#overview)
