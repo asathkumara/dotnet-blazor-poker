@@ -51,7 +51,7 @@ This poker game is a simplified version of the Five-card draw (also known as the
 
 By simplifying the variant further and limiting the game to one player, this app intends to teach new players about the various poker hand rankings (such as Royal Flush, Straight Flush, etc.) as they go through the various rounds. 
 
-<a style="font-size: 20px" href="https://dotnet-blazor-poker.vercel.app" target="_blank">> Open game in new window</a>
+<a style="font-size: 20px" href="https://dotnet-blazor-poker.vercel.app" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open game</a>
 
 ## Gameplay
 
@@ -154,14 +154,14 @@ The background image evokes the feeling of the game being played on a poker tabl
  To increase interactivity with the cards, each card has a tilt effect when hovered, shifting their perspective from 2D into 3D.
 
 
-<a href="https://www.figma.com/file/OKXgCENx92rbdpcXpfznhh/Dotnet-Blazor-Poker-UI-Kit?node-id=0%3A1" target="_blank">> Open Figma UI Kit in new window</a>
+<a href="https://www.figma.com/file/OKXgCENx92rbdpcXpfznhh/Dotnet-Blazor-Poker-UI-Kit?node-id=0%3A1" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma UI Kit</a>
 </br>
 
 **High fidelity prototypes** allowed me to test the key mechanics of the game and interactions with the UI. 
 
-<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A680&scaling=scale-down&page-id=206%3A2&starting-point-node-id=207%3A680" target="_blank">> Open Figma desktop high-fidelity prototype in new window</a>
-<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A697&scaling=min-zoom&page-id=207%3A696&starting-point-node-id=207%3A697" target="_blank">> Open Figma mobile high-fidelity prototype in new window</a>
-</br>
+<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A680&scaling=scale-down&page-id=206%3A2&starting-point-node-id=207%3A680" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma desktop high-fidelity prototype</a>
+
+<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A697&scaling=min-zoom&page-id=207%3A696&starting-point-node-id=207%3A697" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma mobile high-fidelity prototype</a>
 
 ## License
 
