@@ -44,8 +44,10 @@
 
 1. [Overview](#overview)
 2. [Gameplay](#gameplay)
-3. [Design](#design)
-4. [License](#license)
+3. [Design](#design)</br>
+-- [UI Kit](#ui-kit)</br>
+-- [Prototypes](#prototype)
+5. [License](#license)
 
 
 ## Overview
@@ -152,17 +154,16 @@ Note: The game currently does not explain the poker hands and does not include e
 
 The focal point of any card game should be the cards and that heavily influenced my design choices. I also wanted a retro and vintage feel to the game (almost reminiscient of a NES or Namco Arcade game) so I started by developing a **UI Kit** to clarify the visual design. Details such as button states and typography were important to clearly define. 
 
+<a id="ui-kit" href="https://www.figma.com/file/OKXgCENx92rbdpcXpfznhh/Dotnet-Blazor-Poker-UI-Kit?node-id=0%3A1" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma UI Kit</a>
+
 The background image evokes the feeling of the game being played on a poker table felt, establishing the primary color palette and allowing the cards to be the focal point.  The global use of the [Press Start 2P](https://www.dafont.com/press-start-2p.font) font captures that retro game feeling.
 
  To increase interactivity with the cards, each card has a tilt effect when hovered, shifting their perspective from 2D into 3D.
-
-
-<a href="https://www.figma.com/file/OKXgCENx92rbdpcXpfznhh/Dotnet-Blazor-Poker-UI-Kit?node-id=0%3A1" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma UI Kit</a>
 </br>
 
 **High fidelity prototypes** allowed me to test the key mechanics of the game and interactions with the UI. 
 
-<a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A680&scaling=scale-down&page-id=206%3A2&starting-point-node-id=207%3A680" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma desktop high-fidelity prototype</a>
+<a id="prototype" href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A680&scaling=scale-down&page-id=206%3A2&starting-point-node-id=207%3A680" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma desktop high-fidelity prototype</a>
 
 <a href="https://www.figma.com/proto/G1iR5egjXNeZlQRvg2hCiJ/Dotnet-Blazor-Poker---Prototype-V1?node-id=207%3A697&scaling=min-zoom&page-id=207%3A696&starting-point-node-id=207%3A697" target="_blank" title="Ctrl click to open in new window. Markdown doesn't support this yet.">> Open Figma mobile high-fidelity prototype</a>
 
