@@ -1,22 +1,29 @@
 .bet-menu 
 {
-    display: grid;
-    grid-template:
-        [header-left] ". . exit" [header-right]
-        [content-left] "chips chips chips" [content-right]
-        [content-left] "betDisplay betDisplay betDisplay" [content-right]
-        [footer-left] "confirm confirm confirm" [footer-right];
-
-    background-color: var(--color-black);
-    color: var(--color-white);
-    border-radius: 25px;
-
     z-index: 2;
-    position: fixed;
-    min-width: 50rem;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     justify-self: center;
     align-self: center;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: 20px ridge var(--color-brown);
+    border-radius: 25px;
+    min-width: 60vw;
+    height: 500px;
+
+    background-color: var(--color-black-2);
+    color: var(--color-white);
+
+    
+    
 }
 
 .exit-bet-menu 
@@ -24,16 +31,25 @@
     grid-area: exit;
     justify-self: center;
     align-self: center;
+
+    position: absolute;
+    top: 5px;
+    right: 0px;
+
     border: none;
     width: 50px;
     height: 30px;
+    padding: 10px;   
+
+    background: transparent;
+    color: var(--color-white);
+
     transition: none;
 }
 
 .exit-bet-menu:hover 
 {
-    background-color: black;
-    color: var(--color-white);
+    color: var(--color-light-white);
 }
 
 .bet-chips,
@@ -58,7 +74,6 @@
 }
 
 
-
 .bet-chips
 {
     grid-area: chips;
@@ -79,6 +94,8 @@
 
 .bet-confirm-button
 {
+    width: 200px;
+    height: 80px;
     grid-area: confirm;
 }
 
@@ -87,15 +104,15 @@
 {
     .bet-menu
     {
-        min-height: 100vh;
-        min-width: 100vw;
+        min-height: 99vh;
+        min-width: 99vw;
         border-radius: 0px;
     }
 
     .poker-chip
     {
-        width: 80px;
-        height: 80px;
+        width: 75px;
+        height: 75px;
     }
 
     .bet-confirm-button

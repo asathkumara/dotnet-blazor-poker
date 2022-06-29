@@ -62,7 +62,7 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=false />
 
         <section class="user-actions">
-            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Reveal</button>
+            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Reveal</button>
         </section>
     }
 
@@ -71,7 +71,7 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
         <section class="user-actions">
-            <button class="user-action" @onclick=@(() => ShowBetMenu())>Bet</button>
+            <button class="user-action button-primary" @onclick=@(() => ShowBetMenu())>Bet</button>
         </section>
     }
 
@@ -80,7 +80,7 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true IsSelectable=true/>
 
         <section class="user-actions">
-            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Confirm</button>
+            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Confirm</button>
          </section>
     }
 
@@ -89,7 +89,7 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
         <section class="user-actions">
-            <button class="user-action" @onclick=@(() => GameStateManager.AdvanceGameState())>Deal</button>
+            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Deal</button>
         </section>
     }
 
@@ -98,7 +98,7 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
         <section class="user-actions">
-            <button class="user-action" @onclick=@(() => GameStateManager.InitializeGameState())>Buy In</button>
+            <button class="user-action button-primary" @onclick=@(() => GameStateManager.InitializeGameState())>Buy In</button>
         </section>
     }
 

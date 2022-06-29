@@ -1,7 +1,5 @@
 .content 
 {
-    min-height: 100vh;
-    
     display: grid;
     grid-template:
         [header-left] "logo dialogue exit" [header-right]
@@ -9,20 +7,27 @@
         [content-left] "left middle right" [content-right]
         [content-left] "left bottomMiddle right" [content-right];
 
+    min-height: 100vh;
 }
 
 .exit-game
 {
-    grid-area: exit;
+     grid-area: exit;
     justify-self: center;
+
     border: none;
     width: 50px;
     height: 30px;
+    margin-top: 30px;
+
+    background-color: transparent;
+    color: var(--color-white);
 }
 
 .exit-game:hover
 {
     background-color: transparent;
+    color: var(--color-light-white);
 
 }
 
@@ -88,9 +93,13 @@
 
 .user-action
 {
+    width: 250px;
+    max-width: 300px;
+    height: 100px;
+    min-height: 100px;
+
     margin-right: 20px;
-    max-width: 200px;
-   /* min-height: 135px;*/
+    margin-bottom: 30px;
 }
 
 ::deep .app-logo 

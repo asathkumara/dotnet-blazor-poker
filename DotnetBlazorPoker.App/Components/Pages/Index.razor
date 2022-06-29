@@ -7,14 +7,14 @@
     <Logo/>
 
     <section class="menu" tabindex="0" aria-label="Menu options">
-        <button class="menu-option" 
+        <button class="menu-option button-primary" 
                 aria-label="Start Game"
                 @onclick=@(() => navigateTo("/start"))
                 >
             Start
         </button>
 
-        <button class="menu-option" 
+        <button class="menu-option button-primary" 
                 aria-label="Get Help"
                 
                 @onclick=@(() => navigateTo("/help")) 
@@ -23,7 +23,7 @@
             Help
         </button>
 
-        <button class="menu-option"
+        <button class="menu-option button-primary"
                 aria-label="View Options"
                 @onclick=@(() => navigateTo("/options"))
                 disabled
