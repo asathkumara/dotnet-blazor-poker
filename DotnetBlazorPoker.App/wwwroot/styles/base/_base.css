@@ -27,7 +27,8 @@ button
     user-select: none;
 }
 
-button:hover 
+button:hover,
+button:focus
 {
     cursor: pointer;
     border: 2px solid var(--color-black);

@@ -31,7 +31,13 @@
     overflow: hidden;
 }
 
-.menu-option:hover
+.menu-option:focus
+{
+    outline: 0px;
+}
+
+.menu-option:hover,
+.menu-option:focus
 {
     box-shadow: 0px 4px 0px 0px var(--color-black),
                 0px 8px 10px 0px var(--color-black);
@@ -67,13 +73,8 @@
     transition: none;
 }
 
-.menu-option:hover
-{
-    background-color: white;
-    color: black;
-}
-
-.menu-option:hover:before
+.menu-option:hover:before,
+.menu-option:focus:before
 {
     transform: skewX(-45deg) translateX(13.5em);
     transition: all 0.5s ease-in-out;

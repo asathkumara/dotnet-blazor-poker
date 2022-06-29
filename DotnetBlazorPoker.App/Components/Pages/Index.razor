@@ -1,15 +1,35 @@
 ﻿@page "/"
 @inject NavigationManager Navigator
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Dotnet Blazor Poker - Index</PageTitle>
 
 <main class="content">
     <Logo/>
 
-    <section class="menu">
-        <button class="menu-option" @onclick=@(() => navigateTo("/start"))>Start</button>
-        <button class="menu-option" @onclick=@(() => navigateTo("/help")) disabled>Help</button>
-        <button class="menu-option" @onclick=@(() => navigateTo("/options")) disabled>Options</button>
+    <section class="menu" tabindex="0" aria-label="Menu options">
+        <button class="menu-option" 
+                aria-label="Start Game"
+                @onclick=@(() => navigateTo("/start"))
+                >
+            Start
+        </button>
+
+        <button class="menu-option" 
+                aria-label="Get Help"
+                
+                @onclick=@(() => navigateTo("/help")) 
+                disabled
+        >
+            Help
+        </button>
+
+        <button class="menu-option"
+                aria-label="View Options"
+                @onclick=@(() => navigateTo("/options"))
+                disabled
+        >
+            Options
+        </button>
     </section>
     
 </main>
