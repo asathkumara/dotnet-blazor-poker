@@ -1,6 +1,6 @@
 ﻿@if (IsDialogueVisible)
 {
-    <div class="dialogue-box">
+    <aside class="dialogue-box" tabindex="0" role="alert" aria-label=@($"Dialogue from dealer. Dealer says {DialogueText}")>
         <picture>
             <source 
                 type="image/webp"
@@ -14,7 +14,7 @@
             <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
             <button class="dialogue-button" @onclick=@HideDialogueBox>OK</button>
         </div>
-    </div>
+    </aside>
 }
 
 

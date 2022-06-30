@@ -10,13 +10,15 @@
         />
 
         <img 
-            @ref="cardReference"
+            @ref="_cardReference"
             class="card" 
             src=@(GetSource("png")) 
             alt=@(GetAltText()) 
             data-tilt
             data-tilt-scale="1.2"
             draggable="false"
+            tabindex="0"
+            aria-label=@($"{_cardLabel ?? $"Select {GetAltText()}"}")
             @onclick=@(() => ToggleSelectedCard())
         />
     </picture>
@@ -31,7 +33,7 @@ else
         />
 
         <img 
-            @ref="cardReference"
+            @ref="_cardReference"
             class="card" 
             src=@(GetSource("png")) 
             alt=@(GetAltText()) 
@@ -46,8 +48,9 @@ else
 {
     private IJSObjectReference _vanillaTilt;
     private IJSObjectReference _cardHelpers;
-    private ElementReference cardReference;
-    private bool isSelected;
+    private ElementReference _cardReference;
+    private bool _isSelected;
+    private string _cardLabel;
 
     [Parameter]
     public Card? Card { get; set; }
@@ -61,6 +64,11 @@ else
     [Parameter]
     public int Index { get; set; }
 
+    /// <summary>
+    /// Once the component is mounted, import JavaScript libraries for dealing with card functionality.
+    /// </summary>
+    /// <param name="firstRender">True if it's the first render; False otherwise.</param>
+    /// <returns>A task to be awaited</returns>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -68,15 +76,20 @@ else
             _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
             _cardHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/cardHelpers.js" );
 
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", cardReference);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _cardReference);
         }
 
         if (GameStateManager.CurrentState == GameState.Draw)
         {
-            await _cardHelpers.InvokeVoidAsync("setPointer", cardReference);
+            await _cardHelpers.InvokeVoidAsync("setPointer", _cardReference);
         }
     }
 
+    /// <summary>
+    /// Gets the image source with the given extension
+    /// </summary>
+    /// <param name="extension">The extension. Either png or webp.</param>
+    /// <returns>If the hand is visible (face-up), face up cards are returned. Otherwise, the cover of the card is returned.</returns>
     private string GetSource(string extension)
     {
 
@@ -88,6 +101,10 @@ else
         return $"resources/images/cards/cover.{extension}";
     }
 
+    /// <summary>
+    /// Gets the image alt text
+    /// </summary>
+    /// <returns>If the hand is visible (face-up), the rank and suit of the card is returned. Otherwise, "card back" is returned./returns>
     private string GetAltText()
     {
         if (IsVisible)
@@ -98,19 +115,27 @@ else
         return "The card back";
     }
 
+    /// <summary>
+    /// Toggles the card for selection.
+    /// </summary>
+    /// <remarks>A brightness filter indicates selection and when selected, the index of the card is tracked.</remarks>
     private async void ToggleSelectedCard()
     {
-        isSelected = !isSelected;
+        _isSelected = !_isSelected;
 
-        if (isSelected && GameStateManager.CurrentDiscardIndices.Count() < 3)
+        if (_isSelected && GameStateManager.CurrentDiscardIndices.Count() < 3)
         {
-            await _cardHelpers.InvokeVoidAsync("setBrightnessFilter", cardReference); 
-            GameStateManager.CurrentDiscardIndices.Add(Index);  
+            await _cardHelpers.InvokeVoidAsync("setBrightnessFilter", _cardReference); 
+            GameStateManager.CurrentDiscardIndices.Add(Index);
+            _cardLabel = $"{GetAltText()} selected";
+            StateHasChanged();
         }
         else
         {
-            await _cardHelpers.InvokeVoidAsync("resetFilter", cardReference);
+            await _cardHelpers.InvokeVoidAsync("resetFilter", _cardReference);
             GameStateManager.CurrentDiscardIndices.Remove(Index);
+            _cardLabel = $"Select {GetAltText()}";
+            StateHasChanged();
         }
     }
 }

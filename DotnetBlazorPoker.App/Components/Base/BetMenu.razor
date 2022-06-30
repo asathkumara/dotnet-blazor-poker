@@ -1,8 +1,17 @@
 ﻿@inject IJSRuntime JS;
 @inject GameStateManager GameStateManager;
 
-<div class="bet-menu">
-    <button class="exit-bet-menu" @onclick=@OnClose>X</button>
+<aside class="bet-menu" 
+       tabindex="0" 
+       aria-label="Bet Menu. Bet in increments of 1, 5, 25 and 100 credits as long as you have enough credits to do so."
+       @ref=@_betMenuRef
+>       
+    <button class="exit-bet-menu" 
+            aria-label="Close Bet Menu" 
+            @onclick=@OnClose
+    >
+        X
+    </button>
 
     <section class="bet-chips">
         <picture>
@@ -12,7 +21,7 @@
             />
             
             <img 
-                @ref="pokerChip1"
+                @ref="_pokerChip1"
                 class="poker-chip"
                 src=@(GetSource("png", 1)) 
                 alt="Poker chip worth 1 credit" 
@@ -20,6 +29,9 @@
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
                 draggable="false"
+                tabindex="0"
+                aria-label="Bet 1 credit"
+                role="button"
                 data-tilt
                 data-tilt-scale="1.2"
             />
@@ -33,7 +45,7 @@
             />
 
              <img 
-                @ref="pokerChip5"
+                @ref="_pokerChip5"
                 class="poker-chip"
                 src=@(GetSource("png", 5))
                 alt="Poker chip worth 5 credits" 
@@ -41,6 +53,9 @@
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
                 draggable="false"
+                tabindex="0"
+                aria-label="Bet 5 credits"
+                role="button"
                 data-tilt
                 data-tilt-scale="1.2"
             />
@@ -53,7 +68,7 @@
             />
 
             <img 
-                @ref="pokerChip25"
+                @ref="_pokerChip25"
                 class="poker-chip"
                 src=@(GetSource("png", 25)) 
                 alt="Poker chip worth 25 credits" 
@@ -61,6 +76,9 @@
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
                 draggable="false"
+                tabindex="0"
+                aria-label="Bet 25 credits"
+                role="button"
                 data-tilt
                 data-tilt-scale="1.2"
             />
@@ -73,7 +91,7 @@
             />
 
             <img 
-                @ref="pokerChip100"
+                @ref="_pokerChip100"
                 class="poker-chip"
                 src=@(GetSource("png", 100)) 
                 alt="Poker chip worth 100 credits" 
@@ -81,32 +99,36 @@
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
                 draggable="false"
+                tabindex="0"
+                aria-label="Bet 100 credits"
+                role="button"
                 data-tilt
                 data-tilt-scale="1.2"
             />
         </picture>
-       
-
-        
-
-        
     </section>
 
     <section class="bet-display">
-        <h2 class="bet-display-current">You Are Betting @CurrentBet Credits</h2>
+        <h2 class="bet-display-current" role="status">You Are Betting @CurrentBet Credits</h2>
         <p class="bet-display-info"><kdb>Left Click</kdb> (+)  <kdb>Right Click</kdb> (-)</p>
     </section>
 
-    <button class="bet-confirm-button button-primary" @onclick=@ConfirmBet>Confirm</button>
-</div>
+    <button class="bet-confirm-button button-primary" 
+            aria-label=@($"Confirm your bet of {@CurrentBet} Credits")
+            @onclick=@ConfirmBet
+    >
+            Confirm
+    </button>
+</aside>
 
 @code 
 {
     private IJSObjectReference _vanillaTilt;
-    private ElementReference pokerChip1;
-    private ElementReference pokerChip5;
-    private ElementReference pokerChip25;
-    private ElementReference pokerChip100;
+    private ElementReference _pokerChip1;
+    private ElementReference _pokerChip5;
+    private ElementReference _pokerChip25;
+    private ElementReference _pokerChip100;
+    private ElementReference _betMenuRef;
 
     [Parameter]
     public EventCallback OnClose { get; set; }
@@ -122,10 +144,11 @@
         {
             _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
 
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip1);
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip5);
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip25);
-            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", pokerChip100);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip1);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip5);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip25);
+            await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip100);
+            await _betMenuRef.FocusAsync();
         }
     }
 

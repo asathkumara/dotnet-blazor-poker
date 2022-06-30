@@ -4,54 +4,59 @@
 @inject IJSRuntime JS;
 
 
+<PageTitle>Dotnet Blazor Poker - Game</PageTitle>
+
+
 <main class="content">
     <Logo />
     <DialogueBox DialogueText=@GameStateManager.CurrentDialogue/>
+    <button class="exit-game" aria-label="Exit Game" @onclick=@(() => NavigateTo("/"))>X</button>
+    
 
-     <section class="user-balance">
+     <section class="user-balance" tabindex="0" aria-label=@($"Balance display. Your current balance is {@GameStateManager.Player.Balance} credits.")>
         <h1>Balance</h1>
         <p @ref=@_balanceReference>@GameStateManager.Player.Balance</p>
     </section>
 
-      <aside class="left-info">
-        <article class="poker-hand-info">
+      <aside class="left-info" tabindex="0" aria-label="Royal Flush through Full House scoring information.">
+        <article class="poker-hand-info" tabindex="0" aria-label="Royal flush multiplier is 0.9.">
             <h2>Royal Flush</h2>
             <p>0.9</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Straight flush multiplier is 0.8.">
             <h2>Straight Flush</h2>
             <p>0.8</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Four of a kind multiplier is 0.7.">
             <h2>4 of a kind</h2>
             <p>0.7</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Full house multiplier is 0.6.">
             <h2>Full House</h2>
             <p>0.6</p>
         </article>
     </aside>
     
-    <aside class="right-info">
-        <article class="poker-hand-info">
+    <aside class="right-info" tabindex="0" aria-label="Straight through Two Pair scoring information.">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Straight multiplier is 0.5.">
             <h2>Straight</h2>
             <p>0.5</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Three of a kind multiplier is 0.4.">
             <h2>3 of a kind</h2>
             <p>0.4</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Two of a kind multiplier is 0.3.">
             <h2>2 of a kind</h2>
             <p>0.3</p>
         </article>
 
-        <article class="poker-hand-info">
+        <article class="poker-hand-info"  tabindex="0" aria-label="Two pair multiplier is 0.2.">
             <h2>Two Pair</h2>
             <p>0.2</p>
         </article>
@@ -62,7 +67,12 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=false />
 
         <section class="user-actions">
-            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Reveal</button>
+            <button class="user-action button-primary" 
+                    aria-label="Reveal your hand"
+                    @onclick=@(() => GameStateManager.AdvanceGameState())
+            >
+                Reveal
+            </button>
         </section>
     }
 
@@ -71,7 +81,12 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
         <section class="user-actions">
-            <button class="user-action button-primary" @onclick=@(() => ShowBetMenu())>Bet</button>
+            <button class="user-action button-primary" 
+                    aria-label="Place your bets"
+                    @onclick=@(() => ShowBetMenu())
+            >
+                Bet
+            </button>
         </section>
     }
 
@@ -80,7 +95,12 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true IsSelectable=true/>
 
         <section class="user-actions">
-            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Confirm</button>
+            <button class="user-action button-primary"
+                    aria-label=@($"Confirm your selection of cards. If none are selected, you will not redraw.")
+                    @onclick=@(() => GameStateManager.AdvanceGameState())
+            >
+                Confirm
+            </button>
          </section>
     }
 
@@ -89,7 +109,12 @@
         <PlayerHand Hand=@GameStateManager.Player.Hand IsVisible=true />
 
         <section class="user-actions">
-            <button class="user-action button-primary" @onclick=@(() => GameStateManager.AdvanceGameState())>Deal</button>
+            <button class="user-action button-primary"
+                    aria-label="Start another hand"
+                    @onclick=@(() => GameStateManager.AdvanceGameState())
+            >
+                Deal
+            </button>
         </section>
     }
 
@@ -102,12 +127,10 @@
         </section>
     }
 
-    <button class="exit-game" @onclick=@(() => NavigateTo("/"))>X</button>
 
     @if (IsBetMenuVisible)
     {
-        <BetMenu OnClose=@HideBetMenu 
-        />
+        <BetMenu OnClose=@HideBetMenu/>
     }
 
 </main>
@@ -142,7 +165,7 @@
         currentStateHandler();
     }
 
-    private void ShowBetMenu()
+    private async void ShowBetMenu()
     {
         if (GameStateManager.CurrentState == GameState.Bet)
         {

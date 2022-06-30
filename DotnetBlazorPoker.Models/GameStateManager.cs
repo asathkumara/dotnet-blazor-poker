@@ -95,7 +95,7 @@ namespace DotnetBlazorPoker.Models
         public void DrawStateHandler()
         {
             Player.Balance -= CurrentBet;
-            CurrentDialogue = "Select upto 3 cards to redraw";
+            CurrentDialogue = "Select up to 3 cards to redraw";
         }
 
         /// <summary>
