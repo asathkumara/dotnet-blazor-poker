@@ -1,6 +1,6 @@
 ﻿@inject GameStateManager GameStateManager
 
-<section class="player-hand">
+<section class="player-hand" aria-hidden=@IsVisible>
 
 
     @for (int cardIndex = 0; cardIndex < Hand.Count(); cardIndex++)

@@ -7,7 +7,11 @@
 <PageTitle>Dotnet Blazor Poker - Game</PageTitle>
 
 
-<main class="content">
+<main class="content"
+      role="application" 
+      tabindex="0"
+      aria-label="Simplified five card draw poker game. Follow the dealer's dialogue for instructions on every round."
+>
     <Logo />
     <DialogueBox DialogueText=@GameStateManager.CurrentDialogue/>
     
@@ -159,7 +163,9 @@
 @code 
 {
     private IJSObjectReference _animationHelpers;
+    private ElementReference _mainRef;
     private ElementReference _balanceReference;
+    private ElementReference _dialogueReference;
 
     public bool IsBetMenuVisible { get; set; }
 
@@ -177,7 +183,10 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _animationHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/animationHelpers.js" );
+        if (firstRender)
+        {
+            _animationHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/animationHelpers.js" );
+        }
     }
 
     private void HandleGameState()
