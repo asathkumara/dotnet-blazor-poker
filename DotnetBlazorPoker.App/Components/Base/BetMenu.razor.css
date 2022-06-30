@@ -20,36 +20,25 @@
     height: 500px;
 
     background-color: var(--color-black-2);
-    color: var(--color-white);
-
-    
-    
+    color: var(--color-white);    
 }
 
-.exit-bet-menu 
+.exit-button
 {
-    grid-area: exit;
-    justify-self: center;
-    align-self: center;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    margin: 5px;
 
     position: absolute;
-    top: 5px;
-    right: 0px;
-
-    border: none;
-    width: 50px;
-    height: 30px;
-    padding: 10px;   
-
-    background: transparent;
-    color: var(--color-white);
-
-    transition: none;
+    top: 2px;
+    right: 5px;
 }
 
-.exit-bet-menu:hover 
+.exit-button img
 {
-    color: var(--color-light-white);
+    width: 25px;
+    height: 25px
 }
 
 .bet-chips,
@@ -102,11 +91,12 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) 
 {
-    .bet-menu
+    .bet-menu 
     {
         min-height: 99vh;
         min-width: 99vw;
         border-radius: 0px;
+        border: 20px solid var(--color-brown);
     }
 
     .poker-chip
