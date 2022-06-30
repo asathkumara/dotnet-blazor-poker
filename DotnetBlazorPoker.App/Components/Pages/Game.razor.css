@@ -10,7 +10,8 @@
     min-height: 100vh;
 }
 
-.game-controls {
+.game-controls
+{
     grid-area: controls;
     display: flex;
     margin-top: 10px;

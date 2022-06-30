@@ -1,7 +1,7 @@
 ﻿.button-primary
 {
     border: 2px solid var(--color-white);
-    box-shadow: 0px 4px 0px 0px white, 0px 8px 10px 0px #222222;
+    box-shadow: 0px 4px 0px 0px var(--color-white), 0px 8px 10px 0px var(--color-light-black-2);
 
     background-color: transparent;
     color: var(--color-white);
@@ -73,17 +73,19 @@
 .button-secondary
 {
         border-radius: 50%;
+        border: 1px solid var(--color-black);
         padding: 20px;
-        box-shadow: 0px 6px 0px 0px rgba(0, 0, 0, 0.8), 0px 8px 10px 0px #222222;
+        box-shadow: 0px 6px 0px 0px rgba(0, 0, 0, 0.8), 0px 8px 10px 0px var(--color-light-black-2);
 
         background-color: #62320d;
 
         transform: perspective(400px) rotateX(6deg);
 }
 
-.button-secondary:hover
+.button-secondary:hover,
+.button-secondary:active
 {
-    background-color: rgba(98, 50, 13, 0.7);
+    background-color: rgba(98, 50, 13, 0.85);
 }
 
 .button-secondary:active
