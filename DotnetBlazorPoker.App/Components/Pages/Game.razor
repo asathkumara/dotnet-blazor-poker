@@ -10,8 +10,29 @@
 <main class="content">
     <Logo />
     <DialogueBox DialogueText=@GameStateManager.CurrentDialogue/>
-    <button class="exit-game" aria-label="Exit Game" @onclick=@(() => NavigateTo("/"))>X</button>
     
+    <section class="game-controls" tabindex="0" aria-label="Game Controls">
+        <button class="button-secondary settings-button game-control"
+                aria-label="View Settings"
+                disabled
+        >
+            <img src="resources/images/icons/settings-icon-512x512.png" alt="Cogwheel icon" />
+        </button>
+
+        <button class="button-secondary get-help-button game-control"
+                aria-label="Get Help"
+                disabled
+        >       
+            <img src="resources\images\icons\help-icon-289x512.png" alt="Question mark icon" />
+        </button>
+
+        <button class="button-secondary exit-button game-control"
+                aria-label="Exit Game"
+                @onclick=@(() => NavigateTo("/"))
+        >
+            <img src="resources/images/icons/exit-icon-512x512.png" alt="Capital X icon" />
+        </button>
+    </section>
 
      <section class="user-balance" tabindex="0" aria-label=@($"Balance display. Your current balance is {@GameStateManager.Player.Balance} credits.")>
         <h1>Balance</h1>

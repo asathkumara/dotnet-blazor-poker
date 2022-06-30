@@ -2,7 +2,7 @@
 {
     display: grid;
     grid-template:
-        [header-left] "logo dialogue exit" [header-right]
+        [header-left] "logo dialogue controls" [header-right]
         [content-left] "left topMiddle right" [content-right]
         [content-left] "left middle right" [content-right]
         [content-left] "left bottomMiddle right" [content-right];
@@ -10,25 +10,25 @@
     min-height: 100vh;
 }
 
-.exit-game
-{
-     grid-area: exit;
-    justify-self: center;
-
-    border: none;
-    width: 50px;
-    height: 30px;
-    margin-top: 30px;
-
-    background-color: transparent;
-    color: var(--color-white);
+.game-controls {
+    grid-area: controls;
+    display: flex;
+    margin-top: 10px;
 }
 
-.exit-game:hover
+.game-control
 {
-    background-color: transparent;
-    color: var(--color-light-white);
+    width: 50px;
+    height: 50px;
 
+    padding: 10px;
+    margin: 5px;
+}
+
+.game-control img
+{
+    width: 25px;
+    height: 25px
 }
 
 .left-info
@@ -112,10 +112,9 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) 
 {
-    .content 
-    {
+    .content {
         grid-template:
-            [header-left] "logo . exit" [header-right]
+            [header-left] "logo . controls" [header-right]
             [content-left] "topMiddle topMiddle topMiddle" [content-right]
             [content-left] "middle middle middle" [content-right]
             [content-left] "bottomMiddle bottomMiddle bottomMiddle" [content-right];
@@ -138,5 +137,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .game-control button 
+    {
+        padding: 5px;
+    }
+
+    .game-control img 
+    {
+        width: 20px;
+        height: 20px;
     }
 }

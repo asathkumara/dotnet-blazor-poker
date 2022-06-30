@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Components\Utils\" />
     <Folder Include="wwwroot\resources\images\cards\" />
+    <Folder Include="wwwroot\resources\images\icons\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,18 @@
 
 	<ItemGroup>
 		<None Include="publish/wwwroot/vercel.json" CopyToPublishDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\resources\images\icons\exit-icon-512x512.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\resources\images\icons\help-icon-289x512.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\resources\images\icons\settings-icon-512x512.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>
