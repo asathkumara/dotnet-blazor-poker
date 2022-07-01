@@ -8,11 +8,22 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px)
+{
     .card
     {
         width: 78px;
         height: 110px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) 
+{
+    .card 
+    {
+        width: 120px;
+        height: 160px;
     }
 }
 
