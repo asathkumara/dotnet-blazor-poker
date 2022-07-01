@@ -35,6 +35,14 @@
         width: 143px;
         height: 201px;
     }   
+}
 
-
+/* Large desktop devices (2500px and up) */
+@media only screen and (min-width: 2500px) 
+{
+    .card
+    {
+        width: 230px;
+        height: 280px;
+    }
 }

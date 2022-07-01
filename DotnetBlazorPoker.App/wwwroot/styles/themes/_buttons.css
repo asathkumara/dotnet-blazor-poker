@@ -1,4 +1,4 @@
-﻿.button-primary
+.button-primary
 {
     border: 2px solid var(--color-white);
     box-shadow: 0px 4px 0px 0px var(--color-white), 0px 8px 10px 0px var(--color-light-black-2);
@@ -58,14 +58,14 @@
 
     background-color: var(--color-light-white);
 
-    transform: skewX(-45deg) translateX(-8px);
+    transform: skewX(-45deg) translateX(-100%);
     transition: none;
 }
 
 .button-primary:hover:before,
 .button-primary:focus:before
 {
-    transform: skewX(-45deg) translateX(13.5em);
+    transform: skewX(-45deg) translateX(500%);
     transition: all 0.5s ease-in-out;
 }
 

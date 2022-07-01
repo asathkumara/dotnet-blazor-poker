@@ -30,65 +30,6 @@
     margin-bottom: 30px;
 }
 
-/*.menu-option
-{
-    transform: perspective(400px) rotateX(6deg);
-    box-shadow: 0px 4px 0px 0px white, 0px 8px 10px 0px #222222;
-
-    overflow: hidden;
-}
-
-.menu-option:focus
-{
-    outline: 0px;
-}
-
-.menu-option:hover,
-.menu-option:focus
-{
-    box-shadow: 0px 4px 0px 0px var(--color-black),
-                0px 8px 10px 0px var(--color-black);
-
-    
-    transform: perspective(400px) rotateX(6deg);
-}
-
-.menu-option:active
-{
-   
-    border: 2px solid var(--color-black);
-    box-shadow: none;
-
-    background-color: var(--color-white);
-    color: var(--color-black);
-
-    transform: perspective(400px) rotateX(6deg) translateY(4px);
-
-}
-
-.menu-option:before
-{
-    content: "";
-    background-color: rgba(255,255,255,0.5);
-    height: 100%;
-    width: 3em;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: -4.5em;
-    transform: skewX(-45deg) translateX(-8px);
-    transition: none;
-}
-
-.menu-option:hover:before,
-.menu-option:focus:before
-{
-    transform: skewX(-45deg) translateX(13.5em);
-    transition: all 0.5s ease-in-out;
-}*/
-
-
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
     .app-logo 
@@ -114,4 +55,15 @@
         width: 577px;
         height: 413px;
     }
+}
+
+/* Large desktop devices (2500px and up) */ 
+@media only screen and (min-width: 2500px) 
+{
+   .menu-option
+   {
+       width: 400px;
+       height: 150px;
+       font-size: var(--font-xlarge);
+   }
 }

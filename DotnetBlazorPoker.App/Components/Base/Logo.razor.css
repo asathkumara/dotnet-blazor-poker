@@ -17,3 +17,13 @@
         height: 283px;
     }
 }*/
+
+/* Large desktop devices (2500px and up) */ 
+@media only screen and (min-width: 2500px) 
+{
+    .app-logo
+    {
+        width: 490px;
+        height: 450px;
+    }
+}

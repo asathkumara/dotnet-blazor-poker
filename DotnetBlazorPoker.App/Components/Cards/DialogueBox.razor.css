@@ -41,7 +41,7 @@
     align-self: center;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) 
 {
     .dialogue-box
@@ -64,5 +64,26 @@
     .dialogue-button
     {
         display: block;
+    }
+}
+
+/* Large desktop devices (2500px and up) */
+@media only screen and (min-width: 2500px) 
+{
+    .dialogue-box 
+    {
+        width: 800px;
+        height: 150px;
+    }
+
+    .dialogue-avatar
+    {
+        width: 130px;
+        height: 130px;
+    }
+
+    .dialogue
+    {
+        font-size: var(--font-medium);
     }
 }

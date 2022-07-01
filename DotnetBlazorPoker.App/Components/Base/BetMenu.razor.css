@@ -125,3 +125,54 @@
         height: 600px;
     }
 }
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) 
+{
+    .bet-menu 
+    {
+        min-width: 60vw;
+    }
+}
+
+/* Large desktop devices (2500px and up) */ 
+@media only screen and (min-width: 2500px) 
+{
+    .bet-menu
+    {
+        min-width: 50vw;
+    }
+
+    .bet-display-current
+    {
+        font-size: var(--font-medium);
+    }
+
+    .bet-display-info
+    {
+        font-size: var(--font-small);
+    }
+
+    .bet-confirm-button
+    {
+        width: 300px;
+        height: 100px;
+    }
+    .poker-chip 
+    {
+        width: 150px;
+        height: 150px;
+    }
+
+    .exit-button
+    {
+        width: 70px;
+        height: 70px;
+    }
+
+    .exit-button img
+    {
+        width: 35px;
+        height: 35px;
+    }
+}
