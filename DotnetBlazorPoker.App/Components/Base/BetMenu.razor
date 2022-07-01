@@ -3,7 +3,7 @@
 
 <aside class="bet-menu" 
        tabindex="0" 
-       aria-label="Bet Menu. Bet in increments of 1, 5, 25 and 100 credits as long as you have enough credits to do so."
+       aria-label="Bet Menu. Bet in increments of 1, 5, 25 and 100 credits by using space, enter or arrow up. Decrease in the same increments by using arrow down."
        @ref=@_betMenuRef
 >       
     <button class="button-secondary exit-button"
@@ -25,6 +25,7 @@
                 class="poker-chip"
                 src=@(GetSource("png", 1)) 
                 alt="Poker chip worth 1 credit" 
+                @onkeydown=@((keyboardEvent) => BetHandler(keyboardEvent, 1))
                 @onclick=@((mouseEvent) => BetHandler(mouseEvent, 1)) 
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 1))
@@ -49,6 +50,7 @@
                 class="poker-chip"
                 src=@(GetSource("png", 5))
                 alt="Poker chip worth 5 credits" 
+                @onkeydown=@((keyboardEvent) => BetHandler(keyboardEvent, 5))
                 @onclick=@((mouseEvent) => BetHandler(mouseEvent, 5))
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 5))
@@ -72,7 +74,8 @@
                 class="poker-chip"
                 src=@(GetSource("png", 25)) 
                 alt="Poker chip worth 25 credits" 
-                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25)) 
+                @onkeydown=@((keyboardEvent) => BetHandler(keyboardEvent, 25))
+                @onclick=@((mouseEvent) => BetHandler(mouseEvent, 25))
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 25))
                 draggable="false"
@@ -95,6 +98,7 @@
                 class="poker-chip"
                 src=@(GetSource("png", 100)) 
                 alt="Poker chip worth 100 credits" 
+                @onkeydown=@((keyboardEvent) => BetHandler(keyboardEvent, 100))
                 @onclick=@((mouseEvent) => BetHandler(mouseEvent, 100))
                 @oncontextmenu:preventDefault
                 @oncontextmenu=@((mouseEvent) => BetHandler(mouseEvent, 100))
@@ -152,6 +156,11 @@
         }
     }
 
+    /// <summary>
+    /// Handles bets based on the given mouse event and credits
+    /// </summary>
+    /// <param name="mouseEvent">The mouse event</param>
+    /// <param name="credits">The credits to increase or decrease</param>
     private void BetHandler(MouseEventArgs mouseEvent, int credits)
     {
         switch (mouseEvent.Button)
@@ -168,6 +177,32 @@
         }
     }
 
+    /// <summary>
+    /// Handles bets based on the given keyboard event and credits
+    /// </summary>
+    /// <param name="keyEvent">The keyboard event</param>
+    /// <param name="credits">The credits to increase or decrease</param>
+    private void BetHandler(KeyboardEventArgs keyEvent, int credits)
+    {
+        switch (keyEvent.Code)
+        {
+            case "Space":
+            case "Enter":
+            case "ArrowUp":
+                IncreaseBet(credits);
+                break;
+            case "ArrowDown":
+                DecreaseBet(credits);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Increases the bet by the given number of credits
+    /// </summary>
+    /// <param name="credits">The credits to increase by</param>
     private void IncreaseBet(int credits)
     {
         if ((CurrentBet + credits) > GameStateManager.Player.Balance)
@@ -178,6 +213,10 @@
         CurrentBet += credits;
     }
 
+    /// <summary>
+    /// Decreases the bet by the given number of credits
+    /// </summary>
+    /// <param name="credits">The credits to decrease by</param>
     private void DecreaseBet(int credits)
     {
         if ((CurrentBet - credits) < 0)

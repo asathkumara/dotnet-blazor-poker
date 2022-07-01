@@ -35,6 +35,11 @@
     right: 5px;
 }
 
+.exit-button:focus-visible
+{
+    outline: var(--outline);
+}
+
 .exit-button img
 {
     width: 25px;
@@ -73,7 +78,13 @@
     width: 120px;
     height: 120px;
     user-select: none;
+}
 
+.poker-chip:focus-visible
+{
+    outline: var(--outline);
+    outline-offset: 5px;
+    border-radius: 50%;
 }
 
 .poker-chip:hover

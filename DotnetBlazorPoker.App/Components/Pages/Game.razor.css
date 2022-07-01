@@ -26,6 +26,11 @@
     margin: 5px;
 }
 
+.game-control:focus-visible
+{
+    outline: var(--outline);
+}
+
 .game-control img
 {
     width: 25px;
@@ -83,6 +88,17 @@
     text-transform: uppercase;
 
     font-size: var(--font-medium);
+}
+
+.game-controls:focus-visible,
+.poker-hand-info:focus-visible,
+.left-info:focus-visible,
+.right-info:focus-visible,
+.user-balance:focus-visible
+{
+    outline: var(--outline);
+    outline-offset: 5px;
+    border-radius: 5px;
 }
 
 .user-actions 

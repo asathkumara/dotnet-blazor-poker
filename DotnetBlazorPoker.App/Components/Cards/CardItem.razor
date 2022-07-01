@@ -19,7 +19,15 @@
             draggable="false"
             tabindex="0"
             aria-label=@($"{_cardLabel ?? $"Select {GetAltText()}"}")
+            role="button"
             @onclick=@(() => ToggleSelectedCard())
+            @onkeydown=@((keyboardEvent) => {
+                    if (keyboardEvent.Code == "Space" || keyboardEvent.Code == "Enter")
+                    {
+                        ToggleSelectedCard();
+                    }
+                }
+            )
         />
     </picture>
     
