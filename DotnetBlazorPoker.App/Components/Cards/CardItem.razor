@@ -82,14 +82,13 @@ else
         if (firstRender)
         {
             _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
-            _cardHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/cardHelpers.js" );
 
             await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _cardReference);
         }
 
         if (GameStateManager.CurrentState == GameState.Draw)
         {
-            await _cardHelpers.InvokeVoidAsync("setPointer", _cardReference);
+            await _cardReference.SetStyleAsync("cursor", "pointer");
         }
     }
 
@@ -133,16 +132,20 @@ else
 
         if (_isSelected && GameStateManager.CurrentDiscardIndices.Count() < 3)
         {
-            await _cardHelpers.InvokeVoidAsync("setBrightnessFilter", _cardReference); 
+            await _cardReference.SetStyleAsync("filter", "brightness(0.8)");
+
             GameStateManager.CurrentDiscardIndices.Add(Index);
             _cardLabel = $"{GetAltText()} selected";
+
             StateHasChanged();
         }
         else
         {
-            await _cardHelpers.InvokeVoidAsync("resetFilter", _cardReference);
+            await _cardReference.SetStyleAsync("filter", "none");
+
             GameStateManager.CurrentDiscardIndices.Remove(Index);
             _cardLabel = $"Select {GetAltText()}";
+
             StateHasChanged();
         }
     }

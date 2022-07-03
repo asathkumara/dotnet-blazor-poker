@@ -1,11 +1,10 @@
 ﻿@page "/start"
+@implements IDisposable
 @inject GameStateManager GameStateManager
 @inject NavigationManager Navigator
 @inject IJSRuntime JS;
 
-
 <PageTitle>Dotnet Blazor Poker - Game</PageTitle>
-
 
 <main class="content"
       role="application" 
@@ -181,14 +180,6 @@
         GameStateManager.InitializeGameState();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            _animationHelpers = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/components/animationHelpers.js" );
-        }
-    }
-
     private void HandleGameState()
     {
         Action currentStateHandler = GameStateManager.GameStateHandlers[GameStateManager.CurrentState];
@@ -206,16 +197,6 @@
     private void HideBetMenu()
     {
         IsBetMenuVisible = false;
-    }
-
-    private async void IncrementBalance()
-    {
-        await _animationHelpers.InvokeVoidAsync("incrementCounter", _balanceReference);
-    }
-
-     private async void DecrementBalance(int target)
-    {
-        await  _animationHelpers.InvokeVoidAsync("decrementCounter", _balanceReference, target);
     }
 
     private void NavigateTo(string uri)

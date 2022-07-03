@@ -1,32 +1,29 @@
-﻿@if (IsDialogueVisible)
-{
-    <aside class="dialogue-box" 
-           @ref=@_dialogueRef
-           tabindex="0" 
-           aria-label=@($"Dialogue from dealer. Dealer says {DialogueText}")
-    >
-        <picture aria-hidden="true">
-            <source 
-                type="image/webp"
-                srcset=@(GetSource("webp"))
-            />
-            <img class="dialogue-avatar" src=@(GetSource("png")) alt="A picture of the poker dealer" draggable="false" />
-        </picture>
+﻿@implements IDisposable
+@inject GameStateManager GameStateManager
 
-        <div class="dialogue">
-            <p class="speaker">@Speaker</p>
-            <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
-            <button class="dialogue-button" @onclick=@HideDialogueBox>OK</button>
-        </div>
-    </aside>
-}
+<aside class="dialogue-box" 
+        @ref=@_dialogueRef
+        tabindex="0" 
+        aria-label=@($"Dialogue from dealer. Dealer says {DialogueText}")
+>
+    <picture aria-hidden="true">
+        <source 
+            type="image/webp"
+            srcset=@(GetSource("webp"))
+        />
+        <img class="dialogue-avatar" src=@(GetSource("png")) alt="A picture of the poker dealer" draggable="false" />
+    </picture>
 
+    <div class="dialogue">
+        <p class="speaker">@Speaker</p>
+        <p class="dialogue-text">@($"\"{DialogueText}\"")</p>
+        <button class="dialogue-button" @onclick=@HideDialogueBox>OK</button>
+    </div>
+</aside>
 
 @code 
 {
     private ElementReference _dialogueRef;
-
-    public bool IsDialogueVisible { get; set; }
 
     [Parameter]
     public string Speaker { get; set; } = "Dealer:";
@@ -37,32 +34,37 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        GameStateManager.OnGameStateChange += ShowDialogueBox;
 
-        IsDialogueVisible = true;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnAfterRender(firstRender);
+        string dialogueDisplay = await _dialogueRef.GetStyleAsync<string>("display");
 
-        IsDialogueVisible = true;
-
-       await  _dialogueRef.FocusAsync();
+        if (!dialogueDisplay.Equals("none"))
+        {
+            await _dialogueRef.SetFocusAsync();    
+        }   
     }
 
     private void HideDialogueBox()
     {
-        IsDialogueVisible = false;
+        _dialogueRef.SetStyle("display", "none");
     }
 
     private void ShowDialogueBox()
     {
-        IsDialogueVisible = true;
+        _dialogueRef.SetStyle("display", "flex"); 
     }
 
     private string GetSource(string extension)
     {
         return $"resources/images/jack-avatar.{extension}";
-    }
+    } 
 
+    public void Dispose()
+    {
+        GameStateManager.OnGameStateChange -= ShowDialogueBox;
+    }
 }
