@@ -1,6 +1,4 @@
-﻿console.log("Wtf");
-
-const getElementByID = (id) => {
+﻿const getElementByID = (id) => {
     return document.getElementById(id);
 }
 

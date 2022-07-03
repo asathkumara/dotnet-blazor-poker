@@ -146,7 +146,7 @@
     {
         if (firstRender)
         {
-            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././lib/vanilla-tilt/vanilla-tilt.min.js" );
+            _vanillaTilt = await JS.InvokeAsync<IJSObjectReference>("import", "././scripts/vanilla-tilt/vanilla-tilt.min.js" );
 
             await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip1);
             await _vanillaTilt.InvokeVoidAsync("VanillaTilt.init", _pokerChip5);
